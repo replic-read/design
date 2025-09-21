@@ -1,0 +1,42 @@
+name: Create Release
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build_latex:
+    name: Create release
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+    - name: Set up Git repository
+      uses: actions/checkout@v4
+    - name: Compile LaTeX document
+      uses: xu-cheng/latex-action@v4
+      with:
+        root_file: design.tex
+    - name: Upload PDF file
+      uses: actions/upload-artifact@v4
+      with:
+        name: Design.pdf
+        path: design.pdf
+        
+    - name: Get date and time
+      id: date
+      run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+    - name: Create Tag
+      uses: tvdias/github-tagger@v0.0.1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ steps.date.outputs.date }}
+    - name: Create release
+      uses: softprops/action-gh-release@v2
+      with:
+        repository: replic-read/design
+        files: design.pdf
+        name: Design from ${{ steps.date.outputs.date }}
+        tag_name: ${{ steps.date.outputs.date }}
+    
