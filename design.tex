@@ -1,0 +1,35 @@
+% Preamble
+\documentclass{article}
+
+% Packages
+\usepackage{nopageno}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{siunitx}
+\usepackage{sectsty}
+\usepackage{titlesec}
+\graphicspath{{./content/component/pdf/}{./content/deployment/pdf/}{./content/sequence/pdf/}{./content/schema/pdf/}}
+
+\title{Design for replic-read}
+\author{Simon Bumiller}
+
+\input{section-config}
+
+% Document
+\begin{document}
+    \maketitle
+    \newpage
+
+
+    \setcounter{tocdepth}{3}
+
+    \tableofcontents
+    \newpage
+    \listoffigures
+    \newpage
+
+
+    \section{Architecture}\label{sec:architecture}
+    \input{1-architecture}
+
+\end{document}
