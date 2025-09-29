@@ -172,11 +172,11 @@ The infrastructure layer implements the secondary ports from the domain, that ha
 The \textbf{Database} part defines entities and queries to connect to the database.
 It implements the secondary ports of the domain, which in this case are repositories for the several entities and their relations.
 
-\subparagraph{Filesystem}
-The \textbf{Filesystem} part gives a high-level access to the internal filesystem that is needed to save the replicated HTML-files for a replics.
+\subparagraph{I/O}
+The \textbf{I/O} part gives a high-level access to the internal filesystem that is needed to save the replicated HTML-files for a replics.
 These can't (or shouldn't) be stored in a relational database, which is why we need this abstraction to the local filesystem.
 
-\subparagraph{Mail provider}
+\subparagraph{Messaging}
 To verify a user's email address, an email is sent to that address.
 To encapsulate the logic of sending the email, this component is needed.
 
@@ -324,3 +324,147 @@ The \texttt{server\_config} stores the server configuration.
     \caption{Database schema}
     \label{fig:database-schema}
 \end{figure}
+
+\subsubsection{REST-API}
+The REST-API specification is the list of endpoints that make up the REST-API\@.
+This specification was created as an OpenAPI \footnote{https://www.openapis.org/} documentation, that provides a standardized way to declare endpoints, request bodies, response bodies, path variables, query parameters and errors.
+Using OpenAPI has many advantages over others:
+\begin{itemize}
+    \item \textbf{Visualization:} To view the specification visually and interactively, many editors, such as the Swagger-Editor \footnote{https://editor.swagger.io/} are available.
+    \item \textbf{Manual Testing:} Many http-clients that are used for manual testing of endpoints can accept an OpenAPI specification to set up the workspace.
+    \item \textbf{Code-Generation:} Using the swagger-codegen tool \footnote{https://swagger.io/tools/swagger-codegen/}, the specification can automatically create stubs for the server or client in many programming languages and frameworks.
+    \item \textbf{Generation from code:} Vice-versa, the OpenAPI-specification can be automatically generated from the server-side code in many frameworks.
+\end{itemize}
+
+The specification is available in the appendix as a json-file. \newline
+Following is a short summary for each endpoint with its' purpose.
+
+\paragraph{Endpoints}
+
+\subparagraph{/server-config/} This endpoint is used to retrieve the current config on the server.
+This needs to be exposed in order for the client to give the user an adequate experience.
+It also allows admins to update the settings.
+
+\subparagraph{/reports/} This endpoint is used to retrieve all reports that have not been closed/reviewed, only for admins.
+It is also used to create new reports.
+
+\subparagraph{/replics/} This endpoint is used to retrieve all replics.
+The replics that are returned depend on the client, i.e.\ if the client is an admin or not.
+The endpoint is also used to create new replics.
+
+\subparagraph{/auth/submit-email-verification/} This endpoint is used to submit an email-verification-token that was sent to a user via email.
+The client doesn't need to authenticate here.
+
+\subparagraph{/auth/signup/} This endpoint is used to signup and create a new account.
+Account data and credentials are provided via the request body.
+
+\subparagraph{/auth/refresh/} This endpoint is used to get a new access-token from an existing refresh-token.
+This is the default \("\)login\("\) clients will use to authenticate in the background.
+
+\subparagraph{/auth/me/} This endpoint is used to get information about the account that is associated with the authentication provided by the client.
+
+\subparagraph{/auth/login/} This endpoint is used to get a new refresh-token by authenticating with the credentials.
+
+\subparagraph{/admin/shutdown/} This endpoint is used to schedule stopping the server.
+
+\subparagraph{/admin/restart/} This endpoint is used to schedule a restart of the server.
+
+\subparagraph{/accounts/} This endpoint is used to get all accounts on the server.
+It is also used to create a new account.
+
+\subparagraph{/replics/{id}/content/} This endpoint is used to retrieve the replicated HTML-content of the replic with it \texttt{id}.
+
+\subparagraph{/auth/request-email-verification/} This endpoint is used to request an email-verification-token to be sent to the email of the account.
+
+\subsubsection{Graphical User Interface}
+The GUI will be implemented as provided in the requirements document.
+To do so, we will use the AngularJS Framework.
+
+\subsection{Internal server interfaces}\label{subsec:internal-server-interfaces}
+In the following, we will explain the different internal interfaces of the server components that are visible in Figure~\ref{fig:component-server}.
+
+\subsubsection{Request Executors}
+Request dispatchers are responsible for executing the immediate actions that should be triggered by a call to a specific endpoint with a specific HTTP-message.
+They are called as delegates by their respective Request Dispatcher.
+
+\subsubsection{Authorizer}
+The Authorizer encapsulates logic to determine whether a client is allowed to perform the requested action.
+In most cases, this permission-checking boils down to either one of the following:
+\begin{itemize}
+    \item Checking if a user is an admin.
+    \item Checking if a user owns a resource.
+    \item Checking the value of a specific server setting.
+\end{itemize}
+The Authorizer is required to abstrahize and decouple that logic from the execution of the endpoint.
+
+\subsubsection{Services}
+The services exposed by the Domain module couple logic into single method calls.
+Additional to data-querying of \textit{Replics}, \textit{Reports} and \textit{Accounts}, a service for authentication logic is also provided.
+
+\subsubsection{Domain Models}
+The Domain Models are rich data-objects that model the real-life domain objects like \textit{Account} or \textit{Replic}.
+They are used throughout the whole app, especially in the services the domain exposes.
+
+\subsubsection{File Accessor}
+The File Accessor allows to query and save the replicated HTML-files for replics.
+
+\subsubsection{Email Sender}
+The Email Sender is an interface to easily send emails to specific users.
+
+\subsubsection{Repositories}
+The Repositories are accessors to the relational database that stores the data of the application. \newline
+Each repository deals with one specific type of model and provides basic CRUD-functions.
+
+\subsection{Internal client interfaces}\label{subsec:internal-client-interfaces}
+In the following, we will explain the different internal interfaces of the client components that are visible in Figures~\ref{fig:component-clients-shared},~\ref{fig:component-clients-active} and~\ref{fig:component-clients-passive}.
+
+\subsubsection{Network Interface}
+The Network interface provides simple access to each endpoint on the server.
+It also parses the returned bodies and encapsulates errors.
+
+\subsubsection{Domain Models}
+The Domain Models are rich data-objects that model the real-life domain objects like \textit{Account} or \textit{Replic}.
+They are used throughout the whole app, especially in the services the Common Model exposes.
+
+\subsubsection{Authentication Service}
+The authentication service uses the Network Interface to perform authentication calls.
+It is also responsible for storing the authentication-tokens securely in the browser.
+
+\subsubsection{Data services}
+The Data Services act as a wrapper around the Network Interface.
+They cache data and use the Authentication Service to re-perform calls when a request failed due to wrong authentication.
+
+\subsubsection{Scraping service (Active client)}
+The Scraping Service is responsible for gathering the HTML-content of the target web-page.
+
+\subsubsection{Signals, Event Handlers}
+Each ViewModel exposes AngularJS Signals that act as an observable source of data.
+These signals are used in the HTML-templates to show dynamic data to the user. \newline
+Additionally, event handlers are exposed to the templates that receive events for user input.
+
+\subsubsection{Config Service (Active client)}
+The Config Service encapsulates saving of config. \newline
+Currently, the config only contains the URL of the server endpoint.
+
+\subsection{External Libraries and Frameworks}\label{subsec:external-libraries-and-frameworks}
+\subsubsection{Framework: Spring}
+The server uses Spring \footnote{https://spring.io/} as it's framework.
+Spring is a java-framework that provides a foundation for many aspects, most notably for our project are \textit{dependency-injection} and the \textit{http-server} functionality.
+It also eases testing, healthchecks and integration with other services.
+
+\subsubsection{Hibernate}
+Hibernate \footnote{https://hibernate.org/} is a library that allows spring to connect to external relational database.
+Spring adds concise syntax with annotations to declare tables and repositories.
+
+\subsubsection{Commons email}
+The Apache Commons Email \footnote{https://commons.apache.org/proper/commons-email/} library is a library that allows to send emails from java code.
+Next to simple text-emails, Commons Email supports embedded media, HTML-formatted emails and attachments.
+
+\subsubsection{Framework: AngularJS}
+AngularJS is the framework used for both clients. \newline
+AngularJS is a component-based framework that allows to create single-page web-apps using the Model-View-ViewModel style.
+Additionally, AngularJS provides strongly-coupled dependency injection which ensures dependency integrity.
+
+\subsubsection{Angular Material}
+Angular Material \footnote{https://material.angular.dev/} is a library that provides Material-Components \footnote{https://m3.material.io/} to the Angular templates.
+Using Material components allows us to outsource the creation of a design-system and to use establishes rules for UI and UX.

@@ -1,0 +1,1217 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Replic-Read REST-API",
+    "description": "This is the open-api documentation for the REST-API exposed by the backend server of the Replic-Read system",
+    "contact": {
+      "name": "Simon Bumiller",
+      "url": "https://github.com/SimonBumiller",
+      "email": "simon@bumiller.me"
+    },
+    "license": {
+      "name": "Apache-2.0 license",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "security": [
+    {
+      "jwt": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Replics",
+      "description": "Handles the different actions related to eplics."
+    },
+    {
+      "name": "Authentication",
+      "description": "Handles the different actions related to authentication."
+    },
+    {
+      "name": "Accounts",
+      "description": "Handles the different actions related to accounts."
+    },
+    {
+      "name": "Server configuration",
+      "description": "Handles querying and setting of server config."
+    },
+    {
+      "name": "Admin panel",
+      "description": "Handles miscellaneous actions available for the admins."
+    },
+    {
+      "name": "Reports",
+      "description": "Handles the different actions related to reports."
+    }
+  ],
+  "paths": {
+    "/server-config/": {
+      "get": {
+        "tags": [
+          "Server configuration"
+        ],
+        "summary": "Get the server config",
+        "description": "Gets the server config.<br><br><b>Authorization:</b> No specific authorization is required.",
+        "operationId": "get",
+        "responses": {
+          "200": {
+            "description": "Operation was successful.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerConfig"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Server configuration"
+        ],
+        "summary": "Set the server config",
+        "description": "Sets the server config. Accessible for admin accounts.<br><br><b>Authorization:</b> Only admins are authorized to access this endpoint.",
+        "operationId": "put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServerConfig"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operation was successful.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerConfig"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid, or the authentication does not provide access to the requested resource."
+          },
+          "401": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid."
+          }
+        }
+      }
+    },
+    "/reports/": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "summary": "All reports",
+        "description": "Gets all reports that have not been reviewed or closed.<br><br><b>Authorization:</b> Only admins are authorized to access this endpoint.",
+        "operationId": "getAllReports",
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "By what attribute the objects should be sorted.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "creation",
+                "user",
+                "date"
+              ]
+            }
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "description": "The direction that the objects will be sorted in.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ascending",
+                "descending"
+              ]
+            }
+          },
+          {
+            "name": "report_id",
+            "in": "query",
+            "description": "The id of the report.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "The search query. Only objects containing the query will be returned.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation was successful.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Report"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid, or the authentication does not provide access to the requested resource."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Reports"
+        ],
+        "summary": "Create a report",
+        "description": "Creates a new report for the specific replic.<br><br><b>Authorization:</b> The specific authorization requirement depends on the server's config.",
+        "operationId": "create",
+        "parameters": [
+          {
+            "name": "replic_id",
+            "in": "query",
+            "description": "The id of the replic.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateReportRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "If an expiration is required and no expiration was provided/an expiration that is too late was provided."
+          },
+          "429": {
+            "description": "The account has reached the maximum created replics for the current period."
+          },
+          "200": {
+            "description": "Operation was successful.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Report"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/replics/": {
+      "get": {
+        "tags": [
+          "Replics"
+        ],
+        "summary": "All replics",
+        "description": "Gets all replics.<br><br>The replics that are returned depend on whether an admin is making the request, or not. For example, removed replics are not returned to normal users.<br><br><b>Authorization:</b> The authorization needs to point to an account.",
+        "operationId": "getAllReplics",
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "By what attribute the objects should be sorted.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "date",
+                "expiration",
+                "size",
+                "origin"
+              ]
+            }
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "description": "The direction that the objects will be sorted in.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ascending",
+                "descending"
+              ]
+            }
+          },
+          {
+            "name": "user",
+            "in": "query",
+            "description": "The author that the replics will be filtered for",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "replic_id",
+            "in": "query",
+            "description": "The id of the replic.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "The replic states that will be filtered for.",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "active",
+                  "inactive"
+                ]
+              }
+            }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "The search query. Only objects containing the query will be returned.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation was successful.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ReplicInfo"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid, or the authentication does not provide access to the requested resource."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Replics"
+        ],
+        "summary": "Create a replic",
+        "description": "Creates a new replic.<br><br><b>Authorization:</b> The specific authorization requirement depends on the server's config.",
+        "operationId": "create_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "body": {
+                    "$ref": "#/components/schemas/CreateReplicRequest"
+                  },
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "body",
+                  "file"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "If an expiration is required and no expiration was provided/an expiration that is too late was provided."
+          },
+          "429": {
+            "description": "The account has reached the maximum created replics for the current period."
+          },
+          "200": {
+            "description": "Operation was successful.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ReplicInfo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/submit-email-verification/": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Submit email-verification token",
+        "description": "Submits an email-verification token that was sent to a user.<br><br><b>Authorization:</b> No specific authorization is required.",
+        "operationId": "submitEmailVerification",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubmitEmailVerificationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operation was successful."
+          },
+          "400": {
+            "description": "The provided token was invalid."
+          }
+        }
+      }
+    },
+    "/auth/signup/": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Create new account",
+        "description": "Creates a new account. After the account has been added, the credentials can be used to authenticate. If required, an email-verification-email will immediately be sent to the user's email address.<br><br><b>Authorization:</b> No specific authorization is required.",
+        "operationId": "signup",
+        "parameters": [
+          {
+            "name": "send_email",
+            "in": "query",
+            "description": "Whether to send an email-verification link immediately.",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAccountRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Account was created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "account": {
+                      "$ref": "#/components/schemas/Account"
+                    },
+                    "accessToken": {
+                      "type": "string"
+                    },
+                    "refreshToken": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Account was created and verification email was sent.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "account": {
+                      "$ref": "#/components/schemas/Account"
+                    },
+                    "accessToken": {
+                      "type": "string"
+                    },
+                    "refreshToken": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Creating account is disabled."
+          },
+          "409": {
+            "description": "Username or email is already used."
+          }
+        }
+      }
+    },
+    "/auth/refresh/": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Refresh",
+        "description": "Creates a new access-token and refresh-token by providing an existing refresh-token.<br><br><b>Authorization:</b> No specific authorization is required.",
+        "operationId": "refresh",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operation was successful.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountWithTokens"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid."
+          }
+        }
+      }
+    },
+    "/auth/me/": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Get account info",
+        "description": "Gets information about the currently authenticated account.<br><br><b>Authorization:</b> The authorization needs to point to an account.",
+        "operationId": "me",
+        "responses": {
+          "200": {
+            "description": "Operation was successful.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Account"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Update account info",
+        "description": "Updates data of the account.<br><br><b>Authorization:</b> The authorization needs to point to an account.",
+        "operationId": "updateAccount",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAccountRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operation was successful.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Account"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid."
+          },
+          "409": {
+            "description": "Username or email is already used."
+          }
+        }
+      }
+    },
+    "/auth/login/": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Log in account",
+        "description": "Logs into an existing account with either username or email and password.<br><br><b>Authorization:</b> No specific authorization is required.",
+        "operationId": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CredentialsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operation was successful.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountWithTokens"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid."
+          },
+          "400": {
+            "description": "Either username and email, or neither username nor email were provided."
+          }
+        }
+      }
+    },
+    "/admin/shutdown/": {
+      "post": {
+        "tags": [
+          "Admin panel"
+        ],
+        "summary": "Shutdown server",
+        "description": "Shuts the server down.<br><br><b>Authorization:</b> Only admins are authorized to access this endpoint.",
+        "operationId": "shutdown",
+        "responses": {
+          "200": {
+            "description": "Operation was successful."
+          },
+          "403": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid, or the authentication does not provide access to the requested resource."
+          }
+        }
+      }
+    },
+    "/admin/restart/": {
+      "post": {
+        "tags": [
+          "Admin panel"
+        ],
+        "summary": "Restart server",
+        "description": "Restarts the server.<br><br><b>Authorization:</b> Only admins are authorized to access this endpoint.",
+        "operationId": "restart",
+        "responses": {
+          "200": {
+            "description": "Operation was successful."
+          },
+          "403": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid, or the authentication does not provide access to the requested resource."
+          }
+        }
+      }
+    },
+    "/accounts/": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Get all accounts",
+        "description": "Gets all accounts.<br><br><b>Authorization:</b> Only admins are authorized to access this endpoint.",
+        "operationId": "getAllAccounts",
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "By what attribute the objects should be sorted.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "creation",
+                "status",
+                "username"
+              ]
+            }
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "description": "The direction that the objects will be sorted in.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ascending",
+                "descending"
+              ]
+            }
+          },
+          {
+            "name": "account_id",
+            "in": "query",
+            "description": "The id of the account.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "The replic states that will be filtered for.",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "active",
+                  "inactive"
+                ]
+              }
+            }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "The search query. Only objects containing the query will be returned.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation was successful.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Account"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid, or the authentication does not provide access to the requested resource."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Create an account",
+        "description": "Creates a new account.<br><br><b>Authorization:</b> Only admins are authorized to access this endpoint.",
+        "operationId": "createAccount",
+        "parameters": [
+          {
+            "name": "send_email",
+            "in": "query",
+            "description": "Whether to send an email-verification link immediately.",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "verified",
+            "in": "query",
+            "description": "Whether the freshly created account directly has its email verified.",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAccountRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operation was successful.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Account"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Username or email is already used."
+          },
+          "403": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid, or the authentication does not provide access to the requested resource."
+          }
+        }
+      }
+    },
+    "/replics/{id}/content/": {
+      "get": {
+        "tags": [
+          "Replics"
+        ],
+        "summary": "Get content of specific replic",
+        "description": "Gets the replicated HTML-content of a specific replic.<br><br><b>Authorization:</b> The specific authorization requirement depends on the server's config.",
+        "operationId": "getContent",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the replic.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation was successful.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The resource was not found, or the provided authorization does not grant access to this resource."
+          }
+        }
+      }
+    },
+    "/auth/request-email-verification/": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Request email-verification token",
+        "description": "Requests to send an email containing a link to verify the email-address of the user.<br><br><b>Authorization:</b> The authorization needs to point to an account.",
+        "operationId": "requestEmailVerification",
+        "parameters": [
+          {
+            "name": "htmlEmail",
+            "in": "query",
+            "description": "Whether to send a nicely-formatted html email, or a plain text email with a token.",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "An email containing a link was sent."
+          },
+          "409": {
+            "description": "The email of the account is already verified."
+          },
+          "401": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ServerConfig": {
+        "type": "object",
+        "properties": {
+          "createReplicGroup": {
+            "type": "string",
+            "description": "What users can create replics.",
+            "enum": [
+              "all",
+              "with_account",
+              "verified"
+            ]
+          },
+          "accessReplicGroup": {
+            "type": "string",
+            "description": "What users can access replics.",
+            "enum": [
+              "all",
+              "with_account",
+              "verified"
+            ]
+          },
+          "createReportGroup": {
+            "type": "string",
+            "description": "What users can report replics.",
+            "enum": [
+              "all",
+              "with_account",
+              "verified"
+            ]
+          },
+          "maximumExpirationPeriod": {
+            "type": "string",
+            "format": "iso-8601 period",
+            "description": "The maximum duration that a replic can be available for."
+          },
+          "replicLimitPeriod": {
+            "type": "string",
+            "format": "iso-8601 period",
+            "description": "The period for the replic-limit."
+          },
+          "replicLimitCount": {
+            "type": "integer",
+            "format": "positive integer",
+            "description": "The amount of replics allowed to be created per user in the limit-period."
+          },
+          "allowSignup": {
+            "type": "boolean",
+            "description": "Whether accounts can be created"
+          }
+        }
+      },
+      "CreateReportRequest": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "The description of the report."
+          }
+        }
+      },
+      "Report": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "The unique identifier of the object."
+          },
+          "replicId": {
+            "type": "string",
+            "description": "The id of the replic the report references."
+          },
+          "userId": {
+            "type": "string",
+            "description": "The id of the replic the report references."
+          },
+          "createdTimestamp": {
+            "type": "string",
+            "format": "iso-8601 timestamp",
+            "description": "The timestamp when the object was created."
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the replic."
+          }
+        }
+      },
+      "CreateReplicRequest": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "The description of the replic."
+          },
+          "originalUrl": {
+            "type": "string",
+            "format": "url",
+            "description": "The URL of the site the replic is replicating."
+          },
+          "password": {
+            "type": "string",
+            "format": "regex: '^[^\\s]{4,}$'",
+            "description": "The unencrypted password of the replic."
+          },
+          "mediaMode": {
+            "type": "string",
+            "description": "The media-mode of the replic.",
+            "enum": [
+              "all",
+              "images",
+              "none"
+            ]
+          },
+          "expiration": {
+            "type": "string",
+            "description": "The expiration timestamp of the replic."
+          }
+        }
+      },
+      "ReplicInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "The unique identifier of the object."
+          },
+          "created": {
+            "type": "string",
+            "format": "iso-8601 timestamp",
+            "description": "The timestamp when the object was created."
+          },
+          "authorId": {
+            "type": "string",
+            "format": "iso-8601 timestamp",
+            "description": "The timestamp when the object was created."
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the replic."
+          },
+          "originalUrl": {
+            "type": "string",
+            "format": "url",
+            "description": "The URL of the site the replic is replicating."
+          },
+          "hostUrl": {
+            "type": "string",
+            "format": "url",
+            "description": "The URL of the site the replic is replicating."
+          },
+          "mediaMode": {
+            "type": "string",
+            "description": "The media-mode of the replic.",
+            "enum": [
+              "all",
+              "images",
+              "none"
+            ]
+          },
+          "expiration": {
+            "type": "string",
+            "description": "The expiration timestamp of the replic."
+          },
+          "replicState": {
+            "type": "string",
+            "description": "The current state of the replic.",
+            "enum": [
+              "active",
+              "inactive",
+              "removed"
+            ]
+          },
+          "size": {
+            "type": "integer",
+            "description": "The size in bytes of the replic."
+          }
+        }
+      },
+      "SubmitEmailVerificationRequest": {
+        "type": "object",
+        "properties": {
+          "emailToken": {
+            "type": "string",
+            "format": "uuid",
+            "description": "The email-verification token that was sent per e-mail."
+          }
+        }
+      },
+      "CreateAccountRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "format": "regex: '^[^\\s]{4,}$'",
+            "description": "The username of the user."
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "The email of the user."
+          },
+          "password": {
+            "type": "string",
+            "format": "regex: '^[^\\s]{4,}$'",
+            "description": "The unencrypted password of the user."
+          },
+          "profileColor": {
+            "type": "string",
+            "format": "rgb-int",
+            "description": "The rgb color of the user's profile."
+          }
+        }
+      },
+      "Account": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "The unique identifier of the object."
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "The email of the user."
+          },
+          "created": {
+            "type": "string",
+            "format": "iso-8601 timestamp",
+            "description": "The timestamp when the object was created."
+          },
+          "username": {
+            "type": "string",
+            "format": "regex: '^[^\\s]{4,}$'",
+            "description": "The username of the user."
+          },
+          "profile_color": {
+            "type": "integer",
+            "format": "rgb-int",
+            "description": "The rgb color of the user's profile."
+          },
+          "accountState": {
+            "type": "string",
+            "description": "The current state of the user.",
+            "enum": [
+              "unverified",
+              "active",
+              "inactive"
+            ]
+          }
+        }
+      },
+      "AccountWithTokens": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "$ref": "#/components/schemas/Account",
+            "description": "The account of the user."
+          },
+          "accessToken": {
+            "type": "string",
+            "format": "jwt",
+            "description": "The access token of the user."
+          },
+          "refreshToken": {
+            "type": "string",
+            "format": "uuid",
+            "description": "The refresh token of the user."
+          }
+        }
+      },
+      "RefreshRequest": {
+        "type": "object",
+        "properties": {
+          "refreshToken": {
+            "type": "string",
+            "format": "uuid",
+            "description": "The refresh token of the user."
+          }
+        }
+      },
+      "UpdateAccountRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "format": "regex: '^[^\\s]{4,}$'",
+            "description": "The username of the user."
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "The email of the user."
+          },
+          "profileColor": {
+            "type": "string",
+            "format": "rgb-int",
+            "description": "The rgb color of the user's profile."
+          }
+        }
+      },
+      "CredentialsRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "format": "regex: '^[^\\s]{4,}$'",
+            "description": "The username of the user."
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "The email of the user."
+          },
+          "password": {
+            "type": "string",
+            "format": "regex: '^[^\\s]{4,}$'",
+            "description": "The unencrypted password of the user."
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "jwt": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
