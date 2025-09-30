@@ -337,7 +337,14 @@ Using OpenAPI has many advantages over others:
 \end{itemize}
 
 The specification is available in the appendix as a json-file. \newline
-Following is a short summary for each endpoint with its' purpose.
+
+\paragraph{Responses for bad authentication/authorization}
+If an endpoint requires a client to present authentication, and no or bad authentication is presented, the endpoint will return status code \textbf{401}. \newline
+If an endpoint requires specific permission, and that permission is not met, status code \textbf{403} is returned.
+If an endpoint is specific to a resource, for example \texttt{/replics/\{id\}/content/}, and the resource was not found, status code \textbf{403} is also returned.
+This is to safeguard unauthorized clients from detecting the existance of a specific resource by comparing \("\)unauthorized\("\) and \("\)not found\("\) responses. \newline
+Note: Whether an endpoint requires authentication or specific permissions may be dynamic.
+For example, a \textbf{POST} request to \texttt{/reports/} only requires authentication and permission depending on the server setting that defines which clients can create reports.
 
 \paragraph{Endpoints}
 
@@ -372,7 +379,7 @@ This is the default \("\)login\("\) clients will use to authenticate in the back
 \subparagraph{/accounts/} This endpoint is used to get all accounts on the server.
 It is also used to create a new account.
 
-\subparagraph{/replics/{id}/content/} This endpoint is used to retrieve the replicated HTML-content of the replic with it \texttt{id}.
+\subparagraph{/replics/\{id\}/content/} This endpoint is used to retrieve the replicated HTML-content of the replic with it \texttt{id}.
 
 \subparagraph{/auth/request-email-verification/} This endpoint is used to request an email-verification-token to be sent to the email of the account.
 

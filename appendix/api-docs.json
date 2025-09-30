@@ -102,10 +102,7 @@
             }
           },
           "403": {
-            "description": "Either no authentication was presented, or the presented authentication was invalid, or the authentication does not provide access to the requested resource."
-          },
-          "401": {
-            "description": "Either no authentication was presented, or the presented authentication was invalid."
+            "description": "The resource does not exists, or the client does not have acces to it."
           }
         }
       }
@@ -179,7 +176,10 @@
             }
           },
           "403": {
-            "description": "Either no authentication was presented, or the presented authentication was invalid, or the authentication does not provide access to the requested resource."
+            "description": "The resource does not exists, or the client does not have acces to it."
+          },
+          "401": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid."
           }
         }
       },
@@ -227,6 +227,12 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "The resource does not exists, or the client does not have acces to it."
+          },
+          "401": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid."
           }
         }
       }
@@ -237,7 +243,7 @@
           "Replics"
         ],
         "summary": "All replics",
-        "description": "Gets all replics.<br><br>The replics that are returned depend on whether an admin is making the request, or not. For example, removed replics are not returned to normal users.<br><br><b>Authorization:</b> The authorization needs to point to an account.",
+        "description": "Gets all replics.<br><br>The replics that are returned depend on whether an admin is making the request, or not. For example, removed replics are not returned to normal users.<br><br><b>Authorization:</b> The specific authorization requirement depends on the server's config.",
         "operationId": "getAllReplics",
         "parameters": [
           {
@@ -327,7 +333,10 @@
             }
           },
           "403": {
-            "description": "Either no authentication was presented, or the presented authentication was invalid, or the authentication does not provide access to the requested resource."
+            "description": "The resource does not exists, or the client does not have acces to it."
+          },
+          "401": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid."
           }
         }
       },
@@ -379,6 +388,12 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "The resource does not exists, or the client does not have acces to it."
+          },
+          "401": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid."
           }
         }
       }
@@ -638,7 +653,10 @@
             "description": "Operation was successful."
           },
           "403": {
-            "description": "Either no authentication was presented, or the presented authentication was invalid, or the authentication does not provide access to the requested resource."
+            "description": "The resource does not exists, or the client does not have acces to it."
+          },
+          "401": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid."
           }
         }
       }
@@ -656,19 +674,234 @@
             "description": "Operation was successful."
           },
           "403": {
-            "description": "Either no authentication was presented, or the presented authentication was invalid, or the authentication does not provide access to the requested resource."
+            "description": "The resource does not exists, or the client does not have acces to it."
+          },
+          "401": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid."
           }
         }
       }
     },
     "/accounts/": {
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Create an account",
+        "description": "Creates a new account.<br><br><b>Authorization:</b> Only admins are authorized to access this endpoint.",
+        "operationId": "createAccount",
+        "parameters": [
+          {
+            "name": "send_email",
+            "in": "query",
+            "description": "Whether to send an email-verification link immediately.",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "verified",
+            "in": "query",
+            "description": "Whether the freshly created account directly has its email verified.",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAccountRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operation was successful.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Username or email is already used."
+          },
+          "403": {
+            "description": "The resource does not exists, or the client does not have acces to it."
+          },
+          "401": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid."
+          }
+        }
+      }
+    },
+    "/replics/{id}/content/": {
+      "get": {
+        "tags": [
+          "Replics"
+        ],
+        "summary": "Get content of specific replic",
+        "description": "Gets the replicated HTML-content of a specific replic.<br><br><b>Authorization:</b> The specific authorization requirement depends on the server's config.",
+        "operationId": "getContent",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the replic.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "description": "The unencrypted password of the replic.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation was successful.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The resource does not exists, or the client does not have acces to it."
+          },
+          "401": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid."
+          }
+        }
+      }
+    },
+    "/auth/request-email-verification/": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Request email-verification token",
+        "description": "Requests to send an email containing a link to verify the email-address of the user.<br><br><b>Authorization:</b> The authorization needs to point to an account.",
+        "operationId": "requestEmailVerification",
+        "parameters": [
+          {
+            "name": "htmlEmail",
+            "in": "query",
+            "description": "Whether to send a nicely-formatted html email, or a plain text email with a token.",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "An email containing a link was sent."
+          },
+          "409": {
+            "description": "The email of the account is already verified."
+          },
+          "401": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid."
+          }
+        }
+      }
+    },
+    "/accounts/partial/": {
       "get": {
         "tags": [
           "Accounts"
         ],
-        "summary": "Get all accounts",
-        "description": "Gets all accounts.<br><br><b>Authorization:</b> Only admins are authorized to access this endpoint.",
-        "operationId": "getAllAccounts",
+        "summary": "Get all accounts partial",
+        "description": "Gets all accounts with redacted information, e.g. email, state are not included.<br><br><b>Authorization:</b> No specific authorization is required.",
+        "operationId": "getAllAccountsPartial",
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "By what attribute the objects should be sorted.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": []
+            }
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "description": "The direction that the objects will be sorted in.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ascending",
+                "descending"
+              ]
+            }
+          },
+          {
+            "name": "account_id",
+            "in": "query",
+            "description": "The id of the account.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "The search query. Only objects containing the query will be returned.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation was successful.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PartialAccountResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts/full/": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Get all accounts full",
+        "description": "Gets all accounts with full information, e.g. email, state, etc..<br><br><b>Authorization:</b> Only admins are authorized to access this endpoint.",
+        "operationId": "getAllAccountsFull",
         "parameters": [
           {
             "name": "sort",
@@ -743,131 +976,7 @@
             }
           },
           "403": {
-            "description": "Either no authentication was presented, or the presented authentication was invalid, or the authentication does not provide access to the requested resource."
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Accounts"
-        ],
-        "summary": "Create an account",
-        "description": "Creates a new account.<br><br><b>Authorization:</b> Only admins are authorized to access this endpoint.",
-        "operationId": "createAccount",
-        "parameters": [
-          {
-            "name": "send_email",
-            "in": "query",
-            "description": "Whether to send an email-verification link immediately.",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": false
-            }
-          },
-          {
-            "name": "verified",
-            "in": "query",
-            "description": "Whether the freshly created account directly has its email verified.",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": false
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateAccountRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Operation was successful.",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/AccountResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Username or email is already used."
-          },
-          "403": {
-            "description": "Either no authentication was presented, or the presented authentication was invalid, or the authentication does not provide access to the requested resource."
-          }
-        }
-      }
-    },
-    "/replics/{id}/content/": {
-      "get": {
-        "tags": [
-          "Replics"
-        ],
-        "summary": "Get content of specific replic",
-        "description": "Gets the replicated HTML-content of a specific replic.<br><br><b>Authorization:</b> The specific authorization requirement depends on the server's config.",
-        "operationId": "getContent",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "The id of the replic.",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Operation was successful.",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "The resource was not found, or the provided authorization does not grant access to this resource."
-          }
-        }
-      }
-    },
-    "/auth/request-email-verification/": {
-      "get": {
-        "tags": [
-          "Authentication"
-        ],
-        "summary": "Request email-verification token",
-        "description": "Requests to send an email containing a link to verify the email-address of the user.<br><br><b>Authorization:</b> The authorization needs to point to an account.",
-        "operationId": "requestEmailVerification",
-        "parameters": [
-          {
-            "name": "htmlEmail",
-            "in": "query",
-            "description": "Whether to send a nicely-formatted html email, or a plain text email with a token.",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": true
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "An email containing a link was sent."
-          },
-          "409": {
-            "description": "The email of the account is already verified."
+            "description": "The resource does not exists, or the client does not have acces to it."
           },
           "401": {
             "description": "Either no authentication was presented, or the presented authentication was invalid."
@@ -1006,7 +1115,7 @@
             "format": "uuid",
             "description": "The id of the replic."
           },
-          "created": {
+          "createdTimestamp": {
             "type": "string",
             "format": "iso-8601 timestamp",
             "description": "The timestamp when the object was created."
@@ -1106,7 +1215,7 @@
             "format": "email",
             "description": "The email of the user."
           },
-          "created": {
+          "createdTimestamp": {
             "type": "string",
             "format": "iso-8601 timestamp",
             "description": "The timestamp when the object was created."
@@ -1198,6 +1307,26 @@
             "type": "string",
             "format": "regex: '^[^\\s]{4,}$'",
             "description": "The unencrypted password of the user."
+          }
+        }
+      },
+      "PartialAccountResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "The id of the account."
+          },
+          "username": {
+            "type": "string",
+            "format": "regex: '^[^\\s]{4,}$'",
+            "description": "The username of the user."
+          },
+          "profile_color": {
+            "type": "integer",
+            "format": "rgb-int",
+            "description": "The rgb color of the user's profile."
           }
         }
       }
