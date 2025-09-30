@@ -212,12 +212,6 @@
           "required": true
         },
         "responses": {
-          "400": {
-            "description": "If an expiration is required and no expiration was provided/an expiration that is too late was provided."
-          },
-          "429": {
-            "description": "The account has reached the maximum created replics for the current period."
-          },
           "200": {
             "description": "Operation was successful.",
             "content": {
@@ -228,11 +222,11 @@
               }
             }
           },
-          "403": {
-            "description": "The resource does not exists, or the client does not have acces to it."
-          },
           "401": {
             "description": "Either no authentication was presented, or the presented authentication was invalid."
+          },
+          "403": {
+            "description": "The resource does not exists, or the client does not have acces to it."
           }
         }
       }
@@ -842,7 +836,11 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": []
+              "enum": [
+                "username",
+                "status",
+                "creation"
+              ]
             }
           },
           {
@@ -910,7 +908,11 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": []
+              "enum": [
+                "username",
+                "status",
+                "creation"
+              ]
             }
           },
           {
