@@ -47,6 +47,10 @@
       "description": "Handles miscellaneous actions available for the admins."
     },
     {
+      "name": "Personal",
+      "description": "Handles the different actions related to the account of a user."
+    },
+    {
       "name": "Reports",
       "description": "Handles the different actions related to reports."
     }
@@ -100,6 +104,59 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "The resource does not exists, or the client does not have acces to it."
+          }
+        }
+      }
+    },
+    "/reports/{id}/": {
+      "put": {
+        "tags": [
+          "Reports"
+        ],
+        "summary": "Change report status",
+        "description": "Changes the status of a report.<br><br><b>Authorization:</b> Only admins are authorized to access this endpoint.",
+        "operationId": "changeStatus",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the report.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "description": "The description of the report.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "open",
+                "closed",
+                "reviewed"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation was successful.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid."
           },
           "403": {
             "description": "The resource does not exists, or the client does not have acces to it."
@@ -392,6 +449,67 @@
         }
       }
     },
+    "/me/": {
+      "get": {
+        "tags": [
+          "Personal"
+        ],
+        "summary": "Get account info",
+        "description": "Gets information about the currently authenticated account.<br><br><b>Authorization:</b> The authorization needs to point to an account.",
+        "operationId": "me",
+        "responses": {
+          "200": {
+            "description": "Operation was successful.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Personal"
+        ],
+        "summary": "Update account info",
+        "description": "Updates data of the account.<br><br><b>Authorization:</b> The authorization needs to point to an account.",
+        "operationId": "updateAccount",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAccountRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operation was successful.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid."
+          },
+          "409": {
+            "description": "Username or email is already used."
+          }
+        }
+      }
+    },
     "/auth/submit-email-verification/": {
       "post": {
         "tags": [
@@ -531,67 +649,6 @@
           },
           "401": {
             "description": "Either no authentication was presented, or the presented authentication was invalid."
-          }
-        }
-      }
-    },
-    "/auth/me/": {
-      "get": {
-        "tags": [
-          "Authentication"
-        ],
-        "summary": "Get account info",
-        "description": "Gets information about the currently authenticated account.<br><br><b>Authorization:</b> The authorization needs to point to an account.",
-        "operationId": "me",
-        "responses": {
-          "200": {
-            "description": "Operation was successful.",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/AccountResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Either no authentication was presented, or the presented authentication was invalid."
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Authentication"
-        ],
-        "summary": "Update account info",
-        "description": "Updates data of the account.<br><br><b>Authorization:</b> The authorization needs to point to an account.",
-        "operationId": "updateAccount",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateAccountRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Operation was successful.",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/AccountResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Either no authentication was presented, or the presented authentication was invalid."
-          },
-          "409": {
-            "description": "Username or email is already used."
           }
         }
       }
@@ -780,6 +837,31 @@
           },
           "403": {
             "description": "The resource does not exists, or the client does not have acces to it."
+          },
+          "401": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid."
+          }
+        }
+      }
+    },
+    "/me/quota/": {
+      "get": {
+        "tags": [
+          "Personal"
+        ],
+        "summary": "Get replic quota progress",
+        "description": "Gets the count of replics created in the current limit period.<br><br><b>Authorization:</b> The authorization needs to point to an account.",
+        "operationId": "getQuotaProgress",
+        "responses": {
+          "200": {
+            "description": "Operation was successful.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuotaProgressResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Either no authentication was presented, or the presented authentication was invalid."
@@ -1040,15 +1122,6 @@
           }
         }
       },
-      "CreateReportRequest": {
-        "type": "object",
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "The description of the report."
-          }
-        }
-      },
       "ReportResponse": {
         "type": "object",
         "properties": {
@@ -1073,6 +1146,15 @@
           "description": {
             "type": "string",
             "description": "The description of the replic."
+          }
+        }
+      },
+      "CreateReportRequest": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "The description of the report."
           }
         }
       },
@@ -1169,17 +1251,7 @@
           }
         }
       },
-      "SubmitEmailVerificationRequest": {
-        "type": "object",
-        "properties": {
-          "emailToken": {
-            "type": "string",
-            "format": "uuid",
-            "description": "The email-verification token that was sent per e-mail."
-          }
-        }
-      },
-      "CreateAccountRequest": {
+      "UpdateAccountRequest": {
         "type": "object",
         "properties": {
           "username": {
@@ -1191,11 +1263,6 @@
             "type": "string",
             "format": "email",
             "description": "The email of the user."
-          },
-          "password": {
-            "type": "string",
-            "format": "regex: '^[^\\s]{4,}$'",
-            "description": "The unencrypted password of the user."
           },
           "profileColor": {
             "type": "string",
@@ -1243,6 +1310,41 @@
           }
         }
       },
+      "SubmitEmailVerificationRequest": {
+        "type": "object",
+        "properties": {
+          "emailToken": {
+            "type": "string",
+            "format": "uuid",
+            "description": "The email-verification token that was sent per e-mail."
+          }
+        }
+      },
+      "CreateAccountRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "format": "regex: '^[^\\s]{4,}$'",
+            "description": "The username of the user."
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "The email of the user."
+          },
+          "password": {
+            "type": "string",
+            "format": "regex: '^[^\\s]{4,}$'",
+            "description": "The unencrypted password of the user."
+          },
+          "profileColor": {
+            "type": "string",
+            "format": "rgb-int",
+            "description": "The rgb color of the user's profile."
+          }
+        }
+      },
       "AccountWithTokensResponse": {
         "type": "object",
         "properties": {
@@ -1272,26 +1374,6 @@
           }
         }
       },
-      "UpdateAccountRequest": {
-        "type": "object",
-        "properties": {
-          "username": {
-            "type": "string",
-            "format": "regex: '^[^\\s]{4,}$'",
-            "description": "The username of the user."
-          },
-          "email": {
-            "type": "string",
-            "format": "email",
-            "description": "The email of the user."
-          },
-          "profileColor": {
-            "type": "string",
-            "format": "rgb-int",
-            "description": "The rgb color of the user's profile."
-          }
-        }
-      },
       "CredentialsRequest": {
         "type": "object",
         "properties": {
@@ -1309,6 +1391,15 @@
             "type": "string",
             "format": "regex: '^[^\\s]{4,}$'",
             "description": "The unencrypted password of the user."
+          }
+        }
+      },
+      "QuotaProgressResponse": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of replics created in the current period."
           }
         }
       },

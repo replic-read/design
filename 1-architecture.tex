@@ -355,6 +355,8 @@ It also allows admins to update the settings.
 \subparagraph{/reports/} This endpoint is used to retrieve all reports that have not been closed/reviewed, only for admins.
 It is also used to create new reports.
 
+\subparagraph{/reports/\{id\}/} This endpoint is used to change the state of a specific report.
+
 \subparagraph{/replics/} This endpoint is used to retrieve all replics.
 The replics that are returned depend on the client, i.e.\ if the client is an admin or not.
 The endpoint is also used to create new replics.
@@ -368,7 +370,9 @@ Account data and credentials are provided via the request body.
 \subparagraph{/auth/refresh/} This endpoint is used to get a new access-token from an existing refresh-token.
 This is the default \("\)login\("\) clients will use to authenticate in the background.
 
-\subparagraph{/auth/me/} This endpoint is used to get information about the account that is associated with the authentication provided by the client.
+\subparagraph{/me/} This endpoint is used to get information about the account that is associated with the authentication provided by the client.
+
+\subparagraph{/me/quota/} This endpoint is used to get how many replics the user has created in the current limit period.
 
 \subparagraph{/auth/login/} This endpoint is used to get a new refresh-token by authenticating with the credentials.
 

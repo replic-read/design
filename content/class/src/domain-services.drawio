@@ -1,0 +1,94 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0" version="28.2.5">
+  <diagram name="Seite-1" id="tv3RCUC1lsHie5otSo7a">
+    <mxGraphModel dx="1678" dy="972" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-1" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;AccountService&lt;/b&gt;&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="174" y="40" width="480" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-6" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="or_CeoF1ms0C0JRZWl1a-1">
+          <mxGeometry y="40" width="480" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-8" value="getAccounts(Comparator&amp;lt;Account&amp;gt;, UUID, Set&amp;lt;AccountState&amp;gt;, String): List&amp;lt;Account&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="or_CeoF1ms0C0JRZWl1a-1">
+          <mxGeometry y="48" width="480" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-9" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;AuthenticationService&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="124" y="130" width="580" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-10" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="or_CeoF1ms0C0JRZWl1a-9">
+          <mxGeometry y="40" width="580" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-11" value="authenticateWithCredentials(String, String, String): Optional&amp;lt;Account&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="or_CeoF1ms0C0JRZWl1a-9">
+          <mxGeometry y="48" width="580" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-12" value="authenticateWithJwt(String): Optional&amp;lt;Account&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="or_CeoF1ms0C0JRZWl1a-9">
+          <mxGeometry y="68" width="580" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-13" value="authenticateWithRefreshToken(UUID): Optional&amp;lt;Account&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="or_CeoF1ms0C0JRZWl1a-9">
+          <mxGeometry y="88" width="580" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-14" value="createAccessToken(UUID): String throws NotFoundException" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="or_CeoF1ms0C0JRZWl1a-9">
+          <mxGeometry y="108" width="580" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-15" value="createRefreshToken(UUID): UUID throws NotFoundException" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="or_CeoF1ms0C0JRZWl1a-9">
+          <mxGeometry y="128" width="580" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-16" value="createAccount(String, String, String, int, boolean, boolea, boolean): Account throws NotUniqueException, &lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;OperationDisabledException" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="or_CeoF1ms0C0JRZWl1a-9">
+          <mxGeometry y="148" width="580" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-17" value="requestEmailVerification(UUID) throws NotFoundException" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="or_CeoF1ms0C0JRZWl1a-9">
+          <mxGeometry y="180" width="580" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-18" value="validateEmail(UUID): Account throws InvalidTokenException" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="or_CeoF1ms0C0JRZWl1a-9">
+          <mxGeometry y="200" width="580" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-19" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ReplicService&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="143" y="370" width="540" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-20" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="or_CeoF1ms0C0JRZWl1a-19">
+          <mxGeometry y="40" width="540" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-21" value="&lt;div&gt;createReplic(URL, MediaMode, String, Instant, String, Account, FileWriterCallback): Replic throws&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;ReplicQuotaMetException, ReplicContentWriteException, InvalidExpirationException&lt;/span&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="or_CeoF1ms0C0JRZWl1a-19">
+          <mxGeometry y="48" width="540" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-22" value="getReplics(Comparator&amp;lt;Replic&amp;gt;, UUID, UUID, Set&amp;lt;ReplicState&amp;gt;, String): List&amp;lt;Replic&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="or_CeoF1ms0C0JRZWl1a-19">
+          <mxGeometry y="80" width="540" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-23" value="setReplicState(UUID, ReplicState): Replic throws NotFoundException" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="or_CeoF1ms0C0JRZWl1a-19">
+          <mxGeometry y="100" width="540" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-24" value="visitReplic(UUID, UUID): ReplicAccess throws NotFoundException" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="or_CeoF1ms0C0JRZWl1a-19">
+          <mxGeometry y="120" width="540" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-25" value="receiveContent(UUID): InputStream throws NotFoundException" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="or_CeoF1ms0C0JRZWl1a-19">
+          <mxGeometry y="140" width="540" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-29" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ReportService&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="139.5" y="550" width="547" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-30" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="or_CeoF1ms0C0JRZWl1a-29">
+          <mxGeometry y="40" width="547" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-31" value="getReports(Comparator&amp;lt;Report&amp;gt;, String): List&amp;lt;Report&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="or_CeoF1ms0C0JRZWl1a-29">
+          <mxGeometry y="48" width="547" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-32" value="reportReplic(UUID, UUID, String): Report throws NotFoundException, OperationDisabledException" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="or_CeoF1ms0C0JRZWl1a-29">
+          <mxGeometry y="70" width="547" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-36" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ServerConfigService&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="316.25" y="660" width="195.5" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-37" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="or_CeoF1ms0C0JRZWl1a-36">
+          <mxGeometry y="40" width="195.5" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-38" value="get(): ServerConfig)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="or_CeoF1ms0C0JRZWl1a-36">
+          <mxGeometry y="48" width="195.5" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-39" value="save(ServerConfig)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="or_CeoF1ms0C0JRZWl1a-36">
+          <mxGeometry y="70" width="195.5" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
