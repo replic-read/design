@@ -146,27 +146,29 @@ The model of each client consists of the shared model, and a model specific to t
 This allows to share logic that both clients need, namely authentication logic and domain models, but also have specific logic that is decoupled from the other client.
 
 \subsubsection{Server structure}
-The server will utilize a Hexagonal architecture, where the interface layer deals with exposing the \textbf{REST-API} and \textbf{Content Interface}, the Domain handles the domain logic and the infrastructure layer will handle communication to the database, filesystem and email-provider.
+The server will utilize a Hexagonal architecture, where the interface layer deals with exposing the \textbf{REST-API} and \textbf{Content-Interface}, the Domain handles the domain logic and the infrastructure layer will handle communication to the database, filesystem and email-provider.
 
 \paragraph{Interface Layer}
-The interface layer will expose the \textbf{REST-API} and \textbf{Content-Interface}.
+The interface layer will expose the \textit{REST-API} and \textit{Content-Interface}.
 To do so, it will utilize the domain rules provided by the domain.
 
 \subparagraph{REST-API}
 The REST-API is the api that the web-client and browser extension will communicate with.
 Splitting the request-procedures in a \textbf{Request-Executor} and \textbf{Request-Dispatcher} is a common practice to isolate the HTTP-Endpoints from the actual calls to the domain.
-This interface also handles access-control, authorization and authentication.
 
-\subparagraph{Content Interface}
+\subparagraph{Content-Interface}
 The Content interface is a direct access to the replicated HTML-filesa user creates when a replic is created.
 This is done in a form of a minimal REST-API that takes an id of the replic and returns the raw html.
 
 \paragraph{Domain}
-The domain exposes services for the different parts of the system.
-These are accessed by the \textbf{Request-Executor}.
+The \textbf{Domain} is responsible for performing the required business logic, which consists mainly of the basic operations like creating replics, reporting replics, authentication etc.
 
 \paragraph{Infrastructure Layer}
-The infrastructure layer implements the secondary ports from the domain, that handle access to the \textbf{Database}, \textbf{Filesystem} and \textbf{Email-provider}.
+The \textit{Infrastructure Layer} handles communication with the external services that are not part of the replic-read system.
+In here, the \textbf{I/O} component communicates with the external filesystem to store the content of replics.
+The \textbf{Messaging} is responsible for sending emails to users, e.g.\ to verify their addresses.
+Additionally, the \textbf{Database} is also part of the \textit{Infrastructure Layer}.
+It connects to the relational database and ensures data integrity.
 
 \subparagraph{Database}
 The \textbf{Database} part defines entities and queries to connect to the database.
@@ -182,12 +184,13 @@ To encapsulate the logic of sending the email, this component is needed.
 
 \subsubsection{Authentication}
 Authentication in Replic-Read happens only via credentials.
-Logging in creates a \textit{JWT} \footnote{https://www.jwt.io/} (the "access-token") and a refresh-token.
+Logging in creates an \textbf{Access-Token} (the "access-token") and a \textbf{Refresh-Token}.
 
 \paragraph{Access token}
-The access token must be provided for every request to either of the API's.
-It is used to validate the user's identity and bind a request to a specific account.
-Access tokens have a short lifespan of a few minutes and can't be invalidated.
+Access-Tokens are used for short-term authentication and sent with every http-request where needed.
+Access-Tokens have a short lifespan of several minutes and are created for a specific user.
+\newline
+Our system will use \textit{JWT} \footnote{https://www.jwt.io/} as a lightweight implementation of access tokens.
 
 \paragraph{Refresh token}
 Refresh tokens are used to re-login the user if an access-token was invalid or expired without prompting the user to re-enter their credentials.
@@ -217,17 +220,15 @@ Figure~\ref{fig:sequence-create-replic-server} shows the interactions on the ser
 
 \subsubsection{Clients}
 
-\paragraph{Shared model}
-Due to the same Implementation and similar objectives, some domain logic is required by both clients, which can essentially be reduced to Authentication and Replic-Creation.
-To prevent multiple logic, we decided to have a shared model that contains the common requirements.
-We also decide to let the \textbf{Shared Model} be responsible for all the client-logic that does not depend on the specific execution environment.
-For example, a service that exposes functionality to list the users replics may be part of the \textbf{Shared Model}, despite not being used in the active client.
-This way, we gain flexibility for possible future expansion. \newline
+\paragraph{Shared Model}
+The fact that both clients are run inside a browser allows us to use the same frameworks for their implementation.
+Much of the required logic is required by both clients, e.g.\ the authentication and requesting data for a specific replic.
+Therefore, we decide to extract this logic into a shared component, the \textbf{Shared Model}. \newline
 Figure~\ref{fig:component-clients-shared} shows the inner structure and provided interfaces of the \textbf{Common Model}:
-The main components are the \textit{Services} and \textit{Authentication} components.
+The main components are the \textbf{Services} and \textbf{Authentication} components.
 These expose logic for authenticating and getting data from the server.
-The \textit{Services} component dpeends on the \textit{Authentication} component to perform authentication when fetching user-specific data.
-Both dpeend on the \textit{NetworkClient} and \textit{Domain} component, that provide functionality to perform web-requests and the domain-models.
+The \textbf{Services} component depends on the \textbf{Authentication} component to perform authentication when fetching user-specific data.
+Both depend on the \textbf{Network Client} and \textit{Domain} component, that provide functionality to perform web-requests and the domain-models.
 The \textit{Authentication}, \textit{Domain} and \textit{Services} component are bundles in a \textit{Facade} and provided to the \textbf{Active Client} and \textbf{Passive Client}.
 
 \begin{figure}
@@ -269,7 +270,7 @@ Figure~\ref{fig:component-server} shows the three layers:
     It consists of the \textbf{Request Dispatcher} that delegates requests to the \textbf{Request Executor}.
     There, requests are executed by using the primary ports and authorized using the \textbf{Authorizer}.
     \item The \textbf{Domain} is explained further in~\ref{par:domain}.
-    \item The \textbf{Infrastructure Layer} handles direct communication with external services, namely the \textit{Filesystem}, the \textit{Database} and the \textit{Mail provider}.
+    \item The \textbf{Infrastructure Layer} handles direct communication with external services, namely the \textit{Filesystem}, the \textit{Database} and the \textit{Mail Provider}.
     It implements the secondary ports that are required from the \textbf{Domain}.
 \end{itemize}
 
@@ -282,19 +283,12 @@ Figure~\ref{fig:component-server} shows the three layers:
 
 \paragraph{Domain}\label{par:domain}
 The \textbf{Domain} is the component at the center of a hexagonal architecture.
-At it's heart are the domain models, as shown in Figure~\ref{fig:component-domain-models}.
+At it's heart are the domain models.
 They model business entities that are used throughout the application. \newline
 Around the business Models, the \textbf{Domain} module declares primary and secondary ports.
 Primary ports are domain services that get exposed to the \textbf{Interface Layer}, whereas secondary ports are interfaces to be implemented by the \textbf{Infrastructure Layer}.
 The domain models are also exposed to all sides.
 See also Figure~\ref{fig:component-domain}
-
-\begin{figure}
-    \centering
-    \fbox{\includegraphics[width=\linewidth]{component-domain-models}}
-    \caption{Components of the domain models}
-    \label{fig:component-domain-models}
-\end{figure}
 
 \begin{figure}
     \centering
@@ -394,67 +388,61 @@ To do so, we will use the AngularJS Framework.
 \subsection{Internal server interfaces}\label{subsec:internal-server-interfaces}
 In the following, we will explain the different internal interfaces of the server components that are visible in Figure~\ref{fig:component-server}.
 
-\subsubsection{Request Executors}
-Request dispatchers are responsible for executing the immediate actions that should be triggered by a call to a specific endpoint with a specific HTTP-message.
-They are called as delegates by their respective Request Dispatcher.
+\subsubsection{Request-Execution}
+The \textit{Request-Execution} interface provides the request executors.
+These are responsible for executing the immediate actions for specific endpoints and http-methods.
 
-\subsubsection{Authorizer}
-The Authorizer encapsulates logic to determine whether a client is allowed to perform the requested action.
-In most cases, this permission-checking boils down to either one of the following:
-\begin{itemize}
-    \item Checking if a user is an admin.
-    \item Checking if a user owns a resource.
-    \item Checking the value of a specific server setting.
-\end{itemize}
-The Authorizer is required to abstrahize and decouple that logic from the execution of the endpoint.
+\subsubsection{Authorization}
+The \textit{Authorization} interface provides the Authorizer.
+The Authorizer makes decisions whether a client is allowed to perform an action on a specific endpoint, or not.
 
-\subsubsection{Services}
-The services exposed by the Domain module couple logic into single method calls.
-Additional to data-querying of \textit{Replics}, \textit{Reports} and \textit{Accounts}, a service for authentication logic is also provided.
+\subsubsection{Domain-Services}
+The services provided by the \textit{Domain-Services} interface couple logic into single method calls.
+Additional to data-querying of \textit{Replics}, \textit{Reports} and \textit{Accounts}, a service for authentication logic is also included.
 
-\subsubsection{Domain Models}
+\subsubsection{Domain-Models}
 The Domain Models are rich data-objects that model the real-life domain objects like \textit{Account} or \textit{Replic}.
 They are used throughout the whole app, especially in the services the domain exposes.
 
-\subsubsection{File Accessor}
-The File Accessor allows to query and save the replicated HTML-files for replics.
+\subsubsection{I/O}
+The \textit{I/O} interface allows to query and save the replicated HTML-files for replics.
 
-\subsubsection{Email Sender}
-The Email Sender is an interface to easily send emails to specific users.
+\subsubsection{Messaging}
+The \textit{Messaging} is an interface to easily send emails to specific users.
 
-\subsubsection{Repositories}
+\subsubsection{Domain-Repositories}
 The Repositories are accessors to the relational database that stores the data of the application. \newline
 Each repository deals with one specific type of model and provides basic CRUD-functions.
 
 \subsection{Internal client interfaces}\label{subsec:internal-client-interfaces}
 In the following, we will explain the different internal interfaces of the client components that are visible in Figures~\ref{fig:component-clients-shared},~\ref{fig:component-clients-active} and~\ref{fig:component-clients-passive}.
 
-\subsubsection{Network Interface}
+\subsubsection{Network-Interface}
 The Network interface provides simple access to each endpoint on the server.
 It also parses the returned bodies and encapsulates errors.
 
-\subsubsection{Domain Models}
-The Domain Models are rich data-objects that model the real-life domain objects like \textit{Account} or \textit{Replic}.
+\subsubsection{Domain-Models}
+The domain models are rich data-objects that model the real-life domain objects like \textit{Account} or \textit{Replic}.
 They are used throughout the whole app, especially in the services the Common Model exposes.
 
-\subsubsection{Authentication Service}
+\subsubsection{Authentication-Service}
 The authentication service uses the Network Interface to perform authentication calls.
 It is also responsible for storing the authentication-tokens securely in the browser.
 
-\subsubsection{Data services}
-The Data Services act as a wrapper around the Network Interface.
+\subsubsection{Data-Services}
+The data services act as a wrapper around the Network Interface.
 They cache data and use the Authentication Service to re-perform calls when a request failed due to wrong authentication.
 
 \subsubsection{Scraping service (Active client)}
 The Scraping Service is responsible for gathering the HTML-content of the target web-page.
 
-\subsubsection{Signals, Event Handlers}
+\subsubsection{View-Model}
 Each ViewModel exposes AngularJS Signals that act as an observable source of data.
 These signals are used in the HTML-templates to show dynamic data to the user. \newline
 Additionally, event handlers are exposed to the templates that receive events for user input.
 
-\subsubsection{Config Service (Active client)}
-The Config Service encapsulates saving of config. \newline
+\subsubsection{Config-Service (Active client)}
+The config service encapsulates saving of config. \newline
 Currently, the config only contains the URL of the server endpoint.
 
 \subsection{External Libraries and Frameworks}\label{subsec:external-libraries-and-frameworks}

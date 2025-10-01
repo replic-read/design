@@ -178,3 +178,17 @@ Figure~\ref{fig:domain-repositories} shows the repository-structure.
     \caption{Domain repositories}
     \label{fig:domain-repositories}
 \end{figure}
+
+\subsubsection{Internal client interfaces: Common}
+\paragraph{Network Interface}
+The Network Interface provides access to the REST-API to the rest of the common model. \newline
+The RestApi contains for each endpoint and http-method one method that has as its parameters the request body, query parameters and path variables, and as the return value an \texttt{Observable<T>}, where \texttt{T} is the DTO of the response body.
+Figure~\ref{fig:common-networkinterface} shows the class-diagram for the RestApi.
+
+\begin{figure}
+    \centering
+    \fbox{\includegraphics[width=\linewidth]{common-networkinterface}}
+
+    \caption{Network Interface}
+    \label{fig:common-networkinterface}
+\end{figure}
