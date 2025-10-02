@@ -105,6 +105,26 @@ Figure~\ref{fig:using-refresh-token} visualizes this flow.
 
 \subsection{Server fine design}\label{subsec:server-fine-design}
 
+\subsubsection{Configuration}
+Aside from the server-config that can be set up inside the admin-panel in the web-client, there are configurations that are not domain-related and will not be available on that panel.
+The following options can be configured:
+\begin{itemize}
+    \item \textit{Server domain:} The url without path where the server is running.
+    This is required due to the fact that creating the links to the new replic-content requires knowledge of the full URL to the endpoint of \textit{/replic/\{id\}/content/}.
+    \item \textit{REST-API path:} The root path where the REST-API will be available.
+    \item \textit{Access-Token lifespan length:} The length that an access-token is valid.
+    \item \textit{Refresh-Token lifespan length:} The length that a refresh-token is valid.
+    \item \textit{Database url:} The url where the database is located.
+    \item \textit{Database username} The username to connect to the database.
+    \item \textit{Database password} The password to connect to the database.
+    \item \textit{Mail from:} The sender of the email.
+    \item \textit{Mail username:} The username for email authentication.
+    \item \textit{Mail password:} The password for email authentication.
+    \item \textit{Mail smtp host:} The smtp host for email authentication.
+    \item \textit{Mail smtp port:} The smtp port for email authentication.
+    \item \textit{Mail SSL:} Whether to use SSL for email authentication.
+\end{itemize}
+
 \subsubsection{Internal server interfaces}
 In the following, we will present the fine design of the internal server interfaces, as described in~\ref{subsec:internal-server-interfaces}.
 
@@ -234,7 +254,7 @@ As the name suggests, the implementation is based on roles (for \texttt{canChang
 
 \subsubsection{Domain-Repositories}
 The \textbf{Domain-Repositories} interface is provided as shown in Figure~\ref{fig:domain-repositories-p}.
-We use the \textit{Adapter pattern} \footnote{https://en.wikipedia.org/wiki/Adapter_pattern} to delegate the calls. \newline
+We use the \textit{Adapter pattern} \footnote{https://en.wikipedia.org/wiki/Adapter\_pattern} to delegate the calls. \newline
 The adaptee is an instance of a \texttt{CrudRepository<E, UUID>} where \texttt{E} is the appropriate entity-class, e.g. \texttt{ReplicEntity}, that is used in JPA to model a record in a database.
 To abstrahize the containing of the adaptee, each implementation class extends the \texttt{BaseJpaAdapter<E>} class.
 
