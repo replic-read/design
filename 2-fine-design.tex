@@ -108,23 +108,24 @@ Figure~\ref{fig:using-refresh-token} visualizes this flow.
 \subsubsection{Internal server interfaces}
 In the following, we will present the fine design of the internal server interfaces, as described in~\ref{subsec:internal-server-interfaces}.
 
-\paragraph{Request Executors}
-A request executor contains multiple methods, where each method corresponds to exactly one http-method on a specific endpoint.
+\paragraph{Request-Execution}
+The \textbf{Request-Execution} interface provides one method for each endpoint and http-method in the \textit{REST-API}.
 The method parameters are either request bodies, query parameters or path variables.
 The method return values are the response bodies.\newline
 The responsibility of the request executors is to ensure authorization by using the authorizer, handling errors that might occur in the services, and converting the results of the services to the response bodies.
-Figure~\ref{fig:inter-executors} gives an overview over all request-executors and their methods.
+Figure~\ref{fig:inter-executors} gives an overview over the interface.
+Multiple request executors are provided to isolate independant themes.
 
 \begin{figure}
     \centering
     \fbox{\includegraphics[width=\linewidth]{inter-executors}}
 
-    \caption{Request Executors}
+    \caption{Interface for \textit{Request-Execution}}
     \label{fig:inter-executors}
 \end{figure}
 
-\paragraph{Authorizer}
-The authorizer makes the decisions for whether a client, authenticated or anonymous, is allowed to perform a speciifc request. \newline
+\paragraph{Authorization}
+The \textbf{Authorization} makes the decisions for whether a client, authenticated or anonymous, is allowed to perform a specific request. \newline
 In most cases, this comes down to checking whether a client fulfills the auth group set by the config, or whether the client itself is an admin.
 Figure~\ref{fig:inter-authorizer} shows the methods of the authorizer interface.
 
@@ -132,24 +133,24 @@ Figure~\ref{fig:inter-authorizer} shows the methods of the authorizer interface.
     \centering
     \fbox{\includegraphics{inter-authorizer}}
 
-    \caption{Authorizer}
+    \caption{Interface for \textit{Authorization}}
     \label{fig:inter-authorizer}
 \end{figure}
 
-\paragraph{Domain Models}
+\paragraph{Domain-Models}
 The domain models are the basic data classes that model the business structure. \newline
-They are implemented as simple java classes without further logic.
+To differentiate between a replic that has been linked to a file vs.\ one that hasn't been, \texttt{Replic} is a specific case of \texttt{BaseReplic} that lacks the \texttt{size: long} field.
 Figure~\ref{fig:domain-models} shows these classes.
 
 \begin{figure}
     \centering
     \fbox{\includegraphics[width=\linewidth]{domain-models}}
 
-    \caption{Domain models}
+    \caption{Interface for \textit{Domain-Models}}
     \label{fig:domain-models}
 \end{figure}
 
-\paragraph{Domain Services}
+\paragraph{Domain-Services} \label{par:domain-services}
 The domain services encapsulate the general logic of the app. \newline
 The methods of the services are held simple to keep the spirit of the domain.
 To prevent returning complex result types, errors are raised by throwing checked exceptions.
@@ -160,12 +161,12 @@ Figure~\ref{fig:domain-services} shows the services and their methods.
     \centering
     \fbox{\includegraphics[width=\linewidth]{domain-services}}
 
-    \caption{Domain services}
+    \caption{Interface for \textit{Domain-Services}}
     \label{fig:domain-services}
 \end{figure}
 
-\paragraph{Domain repositories}
-The domain repositories are the way the domain communictaes with the database. \newline
+\paragraph{Domain-Repositories}\label{par:domain-repositories}
+The domain repositories are the way the domain communicates with the database. \newline
 Repositories are meant to be a simple interface to queries into a specific table of the relational database.
 For most models, it is sufficient to provide the simple methods \texttt{getAll}, \texttt{getById} and \texttt{save}.
 Filtering logic is made by the corresponding service.
@@ -175,20 +176,114 @@ Figure~\ref{fig:domain-repositories} shows the repository-structure.
     \centering
     \fbox{\includegraphics[width=\linewidth]{domain-repositories}}
 
-    \caption{Domain repositories}
+    \caption{Interface for \textit{Domain-Repositories}}
     \label{fig:domain-repositories}
 \end{figure}
 
-\subsubsection{Internal client interfaces: Common}
-\paragraph{Network Interface}
-The Network Interface provides access to the REST-API to the rest of the common model. \newline
-The RestApi contains for each endpoint and http-method one method that has as its parameters the request body, query parameters and path variables, and as the return value an \texttt{Observable<T>}, where \texttt{T} is the DTO of the response body.
-Figure~\ref{fig:common-networkinterface} shows the class-diagram for the RestApi.
+\paragraph{Messaging}
+The \textbf{Messaging} interface allows to send messages to specified users.
+The interface consists of the \textit{EmailSender} as shown in Figure~\ref{fig:domain-messaging}.
+Every kind of email corresponds to a method that receives the account to send the email, and required data for the email.
 
 \begin{figure}
     \centering
-    \fbox{\includegraphics[width=\linewidth]{common-networkinterface}}
+    \fbox{\includegraphics[width=\linewidth]{domain-messaging}}
 
-    \caption{Network Interface}
-    \label{fig:common-networkinterface}
+    \caption{Interface for \textit{Messaging}}
+    \label{fig:domain-messaging}
+\end{figure}
+
+\paragraph{I/O}\label{par:io}
+The \textbf{I/O} interface allows to access and create the files for storing html-content for replics.
+The interface consists of the \textit{ReplicFileAccessor} as shown in Figure~\ref{fig:domain-io}.
+Simple methods for creating and reading files are there.
+
+\begin{figure}
+    \centering
+    \fbox{\includegraphics[width=\linewidth]{domain-io}}
+
+    \caption{Interface for \textit{I/O}}
+    \label{fig:domain-io}
+\end{figure}
+
+\subsubsection{Request-Execution}
+The \textbf{Request-Execution} interface is provided by the classes implementing the interfaces (marked with \textit{*Impl}), as shown in Figure~\ref{fig:inter-executors-d}.
+The \texttt{AbstractExecutor} class acts as a super class for the executor-implementations by providing access to the \textit{Domain-Services} interface (see~\ref{par:domain-services}).
+The executors use the services to access the data.
+
+\begin{figure}
+    \centering
+    \fbox{\includegraphics[width=\linewidth]{inter-executors-p}}
+
+    \caption{Provision of \textit{Request-Execution}}
+    \label{fig:inter-executors-d}
+\end{figure}
+
+\subsubsection{Authorization}
+The \textbf{Authorization} interface is provided by the \texttt{RoleGroupBasedAuthorizer}class as shown in~\ref{fig:inter-authorizer-p}.
+The class holds a reference to the server-config service (see~\ref{par:domain-services}). \newline
+As the name suggests, the implementation is based on roles (for \texttt{canChangeServerConfig} and \texttt{canReviewReports}), and based on admin-checks for the rest.
+
+\begin{figure}
+    \centering
+    \fbox{\includegraphics{inter-authorizer-p}}
+
+    \caption{Provision of the \textit{Authorizer}}
+    \label{fig:inter-authorizer-p}
+\end{figure}
+
+\subsubsection{Domain-Repositories}
+The \textbf{Domain-Repositories} interface is provided as shown in Figure~\ref{fig:domain-repositories-p}.
+We use the \textit{Adapter pattern} \footnote{https://en.wikipedia.org/wiki/Adapter_pattern} to delegate the calls. \newline
+The adaptee is an instance of a \texttt{CrudRepository<E, UUID>} where \texttt{E} is the appropriate entity-class, e.g. \texttt{ReplicEntity}, that is used in JPA to model a record in a database.
+To abstrahize the containing of the adaptee, each implementation class extends the \texttt{BaseJpaAdapter<E>} class.
+
+\begin{figure}
+    \centering
+    \fbox{\includegraphics[width=\linewidth]{domain-repositories-p}}
+
+    \caption{Provision of the \textit{Domain-Repositories}}
+    \label{fig:domain-repositories-p}
+\end{figure}
+
+\subsubsection{Messaging}
+The \textbf{Messaging} interface is provided by the \textit{ApacheEmailSender} class as shown in Figure~\ref{fig:domain-messaging-p}.
+The class uses the Apache Commons Email library (see~\ref{subsubsec:commons-email}) to send the emails.
+As configuration for the email, the parameters \texttt{from}, \texttt{username}, \texttt{password}, \texttt{smtpHost}, \texttt{smtpPort} and \texttt{sslOnConnect} are provided.
+
+\begin{figure}
+    \centering
+    \fbox{\includegraphics{domain-messaging-p}}
+
+    \caption{Provision of the \textit{Messaging}}
+    \label{fig:domain-messaging-p}
+\end{figure}
+
+\subsubsection{I/O}
+The \textbf{I/O} interface is provided by the \textit{LocalReplicFileAccessor} class as shown in Figure~\ref{fig:domain-io-p}.
+The class uses the standard java File-Api \footnote{https://docs.oracle.com/javase/8/docs/api/java/io/File.html} to write and read the files.
+The class is provided the \texttt{rootDirectory} string to determine where on the local device the files are saved.
+
+\begin{figure}
+    \centering
+    \fbox{\includegraphics{domain-io-p}}
+
+    \caption{Provision of the \textit{I/O}}
+    \label{fig:domain-io-p}
+\end{figure}
+
+\subsubsection{Domain-Services}
+The \textbf{Domain-Services} interface is provided by several implementation classes as shown in Figure~\ref{fig:domain-services-p}. \newline
+The \texttt{AccountServiceImpl} and \texttt{ServerConfigServiceImpl} receive the repositories (see~\ref{par:domain-repositories}) they need to access the database records. \newline
+The \texttt{ReplicServiceImpl} and \texttt{ReportServiceImpl} are each provided the config service, and the former one the replic file accessor (see~\ref{par:io}). \newline
+The \texttt{AuthenticatioNServiceImpl} has access to the token repository, as well as several other services.
+This is allowed as no circular definition occurs, and legitimate as authentication is more abstract than the other operations.
+Additionally, it is provided the configuration values \texttt{accessTokenExpiration}, \texttt{refreshTokenExpiration} and \texttt{accessTokenSecret} which are required for the authentication setups.
+
+\begin{figure}
+    \centering
+    \fbox{\includegraphics[width=\linewidth]{domain-services-p}}
+
+    \caption{Provision of the \textit{Domain-Services}}
+    \label{fig:domain-services-p}
 \end{figure}

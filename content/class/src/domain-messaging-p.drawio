@@ -1,0 +1,46 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0" version="28.2.5">
+  <diagram name="Seite-1" id="tv3RCUC1lsHie5otSo7a">
+    <mxGraphModel dx="983" dy="570" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-49" value="&lt;div&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;EmailSender&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="490" y="410" width="352" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-50" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="RG_ibap2kgqLSs5oj8Kn-49">
+          <mxGeometry y="40" width="352" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-51" value="sendVerificationToken(Account, AuthToken, boolean): boolean" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="RG_ibap2kgqLSs5oj8Kn-49">
+          <mxGeometry y="48" width="352" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-52" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" edge="1" parent="1" source="RG_ibap2kgqLSs5oj8Kn-53" target="RG_ibap2kgqLSs5oj8Kn-49">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-53" value="&lt;b&gt;ApacheEmailSender&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="490" y="540" width="352" height="158" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-55" value="&lt;div&gt;from: String&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="RG_ibap2kgqLSs5oj8Kn-53">
+          <mxGeometry y="30" width="352" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-56" value="username: String" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="RG_ibap2kgqLSs5oj8Kn-53">
+          <mxGeometry y="50" width="352" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-57" value="password: String" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="RG_ibap2kgqLSs5oj8Kn-53">
+          <mxGeometry y="70" width="352" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-58" value="smtpHost: String" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="RG_ibap2kgqLSs5oj8Kn-53">
+          <mxGeometry y="90" width="352" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-59" value="smtpPort: int" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="RG_ibap2kgqLSs5oj8Kn-53">
+          <mxGeometry y="110" width="352" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-60" value="sslOnConnect: boolean" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="RG_ibap2kgqLSs5oj8Kn-53">
+          <mxGeometry y="130" width="352" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-54" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="RG_ibap2kgqLSs5oj8Kn-53">
+          <mxGeometry y="150" width="352" height="8" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

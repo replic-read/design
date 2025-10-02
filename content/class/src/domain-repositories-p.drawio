@@ -1,0 +1,158 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0" version="28.2.5">
+  <diagram name="Seite-1" id="tv3RCUC1lsHie5otSo7a">
+    <mxGraphModel dx="1426" dy="826" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="7UgKAC-AJGtY0KaAJKL_-110" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;AccountRepository&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="220" y="195" width="210" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="7UgKAC-AJGtY0KaAJKL_-111" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="7UgKAC-AJGtY0KaAJKL_-110" vertex="1">
+          <mxGeometry y="40" width="210" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="7UgKAC-AJGtY0KaAJKL_-113" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;AuthTokenRepository&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="220" y="265" width="210" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="7UgKAC-AJGtY0KaAJKL_-114" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="7UgKAC-AJGtY0KaAJKL_-113" vertex="1">
+          <mxGeometry y="40" width="210" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="7UgKAC-AJGtY0KaAJKL_-116" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ReplicAccessRepository&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="220" y="335" width="210" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="7UgKAC-AJGtY0KaAJKL_-117" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="7UgKAC-AJGtY0KaAJKL_-116" vertex="1">
+          <mxGeometry y="40" width="210" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="7UgKAC-AJGtY0KaAJKL_-119" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ReplicRepository&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="220" y="405" width="210" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="7UgKAC-AJGtY0KaAJKL_-120" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="7UgKAC-AJGtY0KaAJKL_-119" vertex="1">
+          <mxGeometry y="40" width="210" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="7UgKAC-AJGtY0KaAJKL_-122" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ReportRepository&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="220" y="475" width="210" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="7UgKAC-AJGtY0KaAJKL_-123" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="7UgKAC-AJGtY0KaAJKL_-122" vertex="1">
+          <mxGeometry y="40" width="210" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="7UgKAC-AJGtY0KaAJKL_-124" value="&lt;div&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;ServerConfigRepository&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="220" y="545" width="210" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="7UgKAC-AJGtY0KaAJKL_-125" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="7UgKAC-AJGtY0KaAJKL_-124" vertex="1">
+          <mxGeometry y="40" width="210" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="7UgKAC-AJGtY0KaAJKL_-126" value="get(): Optional&amp;lt;ServerConfig&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="7UgKAC-AJGtY0KaAJKL_-124" vertex="1">
+          <mxGeometry y="48" width="210" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="7UgKAC-AJGtY0KaAJKL_-127" value="save(ServerConfig)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="7UgKAC-AJGtY0KaAJKL_-124" vertex="1">
+          <mxGeometry y="68" width="210" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-1" value="&lt;b&gt;BaseJpaRepositoryAdapter&amp;lt;E&amp;gt;&lt;/b&gt;&lt;div&gt;{abstract}&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="870" y="395" width="230" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-3" value="delegate: CrudRepository&amp;lt;E, UUID&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="RG_ibap2kgqLSs5oj8Kn-1">
+          <mxGeometry y="40" width="230" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-2" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="RG_ibap2kgqLSs5oj8Kn-1">
+          <mxGeometry y="60" width="230" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" edge="1" parent="1" source="RG_ibap2kgqLSs5oj8Kn-4" target="7UgKAC-AJGtY0KaAJKL_-119">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" edge="1" parent="1" source="RG_ibap2kgqLSs5oj8Kn-4" target="RG_ibap2kgqLSs5oj8Kn-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-4" value="&lt;b&gt;JpaReplicRepositoryAdapter&lt;/b&gt;&lt;div&gt;«E = ReplicEntity»&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=41;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="530" y="404.5" width="220" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-6" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="RG_ibap2kgqLSs5oj8Kn-4">
+          <mxGeometry y="41" width="220" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" edge="1" parent="1" source="RG_ibap2kgqLSs5oj8Kn-8" target="7UgKAC-AJGtY0KaAJKL_-116">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" edge="1" parent="1" source="RG_ibap2kgqLSs5oj8Kn-8" target="RG_ibap2kgqLSs5oj8Kn-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="820" y="359" />
+              <mxPoint x="820" y="429" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-8" value="&lt;b&gt;JpaReplicAccessRepositoryAdapter&lt;/b&gt;&lt;div&gt;«E = ReplicAccessEntity»&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=41;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="525" y="334.5" width="230" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-9" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="RG_ibap2kgqLSs5oj8Kn-8">
+          <mxGeometry y="41" width="230" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" edge="1" parent="1" source="RG_ibap2kgqLSs5oj8Kn-10" target="7UgKAC-AJGtY0KaAJKL_-113">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" edge="1" parent="1" source="RG_ibap2kgqLSs5oj8Kn-10" target="RG_ibap2kgqLSs5oj8Kn-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="820" y="289" />
+              <mxPoint x="820" y="429" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-10" value="&lt;b&gt;JpaAuthTokenRepositoryAdapter&lt;/b&gt;&lt;div&gt;«E = AuthTokenEntity»&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=41;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="525" y="264.5" width="230" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-11" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="RG_ibap2kgqLSs5oj8Kn-10">
+          <mxGeometry y="41" width="230" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" edge="1" parent="1" source="RG_ibap2kgqLSs5oj8Kn-12" target="7UgKAC-AJGtY0KaAJKL_-110">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" edge="1" parent="1" source="RG_ibap2kgqLSs5oj8Kn-12" target="RG_ibap2kgqLSs5oj8Kn-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="820" y="219" />
+              <mxPoint x="820" y="429" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-12" value="&lt;b&gt;JpaAccountRepositoryAdapter&lt;/b&gt;&lt;div&gt;«E = AccountEntity»&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=41;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="525" y="194.5" width="230" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-13" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="RG_ibap2kgqLSs5oj8Kn-12">
+          <mxGeometry y="41" width="230" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" edge="1" parent="1" source="RG_ibap2kgqLSs5oj8Kn-14" target="7UgKAC-AJGtY0KaAJKL_-122">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" edge="1" parent="1" source="RG_ibap2kgqLSs5oj8Kn-14" target="RG_ibap2kgqLSs5oj8Kn-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="820" y="499" />
+              <mxPoint x="820" y="429" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-14" value="&lt;b&gt;JpaReportRepositoryAdapter&lt;/b&gt;&lt;div&gt;«E = ReportEntity»&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=41;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="525" y="474.5" width="230" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-15" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="RG_ibap2kgqLSs5oj8Kn-14">
+          <mxGeometry y="41" width="230" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" edge="1" parent="1" source="RG_ibap2kgqLSs5oj8Kn-16" target="7UgKAC-AJGtY0KaAJKL_-124">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" edge="1" parent="1" source="RG_ibap2kgqLSs5oj8Kn-16" target="RG_ibap2kgqLSs5oj8Kn-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="820" y="589" />
+              <mxPoint x="820" y="429" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-16" value="&lt;b&gt;JpaServerConfigRepositoryAdapter&lt;/b&gt;&lt;div&gt;«E = ServerConfigEntity»&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=41;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="525" y="564.5" width="230" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="RG_ibap2kgqLSs5oj8Kn-17" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="RG_ibap2kgqLSs5oj8Kn-16">
+          <mxGeometry y="41" width="230" height="8" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
