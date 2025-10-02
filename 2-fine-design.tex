@@ -256,7 +256,7 @@ As the name suggests, the implementation is based on roles (for \texttt{canChang
 
 \subsubsection{Domain-Repositories}
 The \textbf{Domain-Repositories} interface is provided as shown in Figure~\ref{fig:domain-repositories-p}.
-We use the \textit{Adapter pattern} \footnote{https://en.wikipedia.org/wiki/Adapter_pattern} to delegate the calls. \newline
+We use the \textit{Adapter pattern} \footnote{https://en.wikipedia.org/wiki/Adapter\_pattern} to delegate the calls. \newline
 The adaptee is an instance of a \texttt{CrudRepository<E, UUID>} where \texttt{E} is the appropriate entity-class, e.g. \texttt{ReplicEntity}, that is used in JPA to model a record in a database.
 To abstrahize the containing of the adaptee, each implementation class extends the \texttt{BaseJpaAdapter<E>} class.
 
