@@ -14,13 +14,6 @@ jobs:
     steps:
     - name: Set up Git repository
       uses: actions/checkout@v4
-    - name: Install drawio CLI
-      run: snap install drawio
-    - name: Convert drawio files to pdf
-      run: |
-        chmod +x ./drawio_to_pdfs.sh
-        ./drawio_to_pdfs.sh
-      shell: bash
     - name: Compile LaTeX document
       uses: xu-cheng/latex-action@v4
       with:
