@@ -309,3 +309,105 @@ Additionally, it is provided the configuration values \texttt{accessTokenExpirat
     \caption{Provision of the \textit{Domain-Services}}
     \label{fig:domain-services-p}
 \end{figure}
+
+\subsection{Client fine design}\label{subsec:client-fine-design-common}
+
+\subsubsection{Client internal interfaces}
+In the following, we will present the fine design of the internal server interfaces, as described in~\ref{subsec:internal-client-interfaces}.
+
+\paragraph{Network-Interface}
+The \textit{Network-Interface} provides streamlined access to all relevant endpoints and http-methods on the \textit{REST-API}, as shown in Figure~\ref{fig:common-networkinterface}.
+Per endpoint and http-method, there is one method whose parameters are the request body, path variables or query paremetr.
+The return type of the methods are \texttt{Observable<T>}s from \textit{RxJs} \footnote{https://rxjs.dev/guide/observable} that contain the response body of the request.
+
+\begin{figure}
+    \centering
+    \fbox{\includegraphics[width=\linewidth]{common-networkinterface}}
+
+    \caption{Interface of \textit{Network-Interface}}
+    \label{fig:common-networkinterface}
+\end{figure}
+
+\paragraph{Domain-Models}\label{par:common-domain-models}
+The \textit{Domain-Models} provides a collection of rich data objects that model the business data of the application, as shown in Figure~\ref{fig:common-domain-models}.
+The domain models are the classes that will be used around the app, mostly in the \textit{ViewModel}s. \newline
+Due to the different amount of data exposed concerning the authenticated user, and other users, we differentiate between the \textit{PartialAccount} and the normal \textit{Account}.
+
+\begin{figure}
+    \centering
+    \fbox{\includegraphics[width=\linewidth]{common-domain-models}}
+
+    \caption{Interface of \textit{Domain-Models} (Client)}
+    \label{fig:common-domain-models}
+\end{figure}
+
+\paragraph{Authentication-Service}\label{par:common-authentication-service}
+The \textit{Authentication-Service} provides methods related to authentication and the authenticated account, as shown in Figure~\ref{fig:common-authentication-service}. \newline
+The interface also contains specific errors that are returned from the methods in case the operation fails. \newline
+At the core of the \textit{Authentication-Service} is the \texttt{save<T>(NetworkInterface, () => Observable<T>): Observable<T>} method.
+It allows the user to perform a method on a specific \texttt{NetworkInterface} without worrying about authentication: if the request fails, and the error my have been caused by a lack of authentication, the token in the network-interface is updated and the request performed again.
+
+\begin{figure}
+    \centering
+    \fbox{\includegraphics[width=\linewidth]{common-authentication-service}}
+
+    \caption{Interface of \textit{Authentication-Service} (Client)}
+    \label{fig:common-authentication-service}
+\end{figure}
+
+\paragraph{Data-Services}\label{par:common-data-services}
+The \textit{Data-Services} provides all access to the data that is being displayed and updated by the clients.
+The interface consists of multiple services as shown in Figure~\ref{fig:common-data-services}. \newline
+The interface also provides some specialized error types that make the error-handling easier.
+
+\begin{figure}
+    \centering
+    \fbox{\includegraphics[width=\linewidth]{common-data-services}}
+
+    \caption{Interface of \textit{Data-Services} (Client)}
+    \label{fig:common-data-services}
+\end{figure}
+
+\paragraph{Common-Facade}
+The \textit{Common-Facade} interface bundles the already introduced interfaces \textit{Data-Services} (\ref{par:common-data-services}), \textit{Authentication-Service} (\ref{par:common-authentication-service}) and \textit{Domain-Models} (\ref{par:common-domain-models}).
+
+\paragraph{Config-Service}
+The \textit{Config-Service} exposes functionality to locally save the settings of the active client.
+As shown in Figure~\ref{fig:active-config-service}, the only configuration is the URL of the backend server.
+
+\begin{figure}
+    \centering
+    \fbox{\includegraphics[width=\linewidth]{active-config-service}}
+
+    \caption{Interface of \textit{Config-Service} (Active Client)}
+    \label{fig:active-config-service}
+\end{figure}
+
+\paragraph{Scrape-Service}
+The \textit{Scrape-Service} handles creating the singular HTML-file that is sent to the server when creating a replic.
+Figure~\ref{fig:active-scrape-service} shows the slim interface, where the only method \texttt{createForCurrentTab} creates this HTML-file.
+
+\begin{figure}
+    \centering
+    \fbox{\includegraphics[width=\linewidth]{active-scrape-service}}
+
+    \caption{Interface of \textit{Scrape-Service} (Active Client)}
+    \label{fig:active-scrape-service}
+\end{figure}
+
+\paragraph{ViewModel (Active client)}
+
+
+% \subsubsection{Network-Interface}
+% The \textit{Network-Interface} is provided by the \texttt{AngularHttpNetworkInterface} class, as shown in Figure~\ref{fig:common-networkinterface-p}.
+% It is backed by a \texttt{HttpClient} \footnote{https://angular.dev/guide/http} from \textit{AngularJs}.that is used to perform the http-requests.
+% The methods delegate calls to the respective endpoint and add necessary headers.
+%
+% \begin{figure}
+%     \centering
+%     \fbox{\includegraphics[width=\linewidth]{common-networkinterface-p}}
+%
+%     \caption{Provision of \textit{Network-Interface} (Client)}
+%     \label{fig:common-networkinterface-p}
+% \end{figure}
+
