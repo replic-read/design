@@ -354,6 +354,7 @@
                 "type": "string",
                 "enum": [
                   "active",
+                  "inactive",
                   "inactive"
                 ]
               }
@@ -1030,6 +1031,7 @@
                 "type": "string",
                 "enum": [
                   "active",
+                  "inactive",
                   "inactive"
                 ]
               }
@@ -1248,6 +1250,10 @@
           "size": {
             "type": "integer",
             "description": "The size in bytes of the replic."
+          },
+          "hasPassword": {
+            "type": "boolean",
+            "description": "Whether the replic is secured via a password."
           }
         }
       },
