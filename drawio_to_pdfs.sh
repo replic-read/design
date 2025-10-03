@@ -4,3 +4,6 @@ find ./content/drawio/ -type f -name "*.drawio" | while IFS= read -r line ; do d
 # Convert all PDF's in ./content/ to PDF-1.5
 find ./content/ -type f -name "*.pdf" | while IFS= read -r line ; do gs -q -sDEVICE=pdfwrite -dCompatibilityLevel=1.5 -o $line.converted $line; done
 find ./content/ -type f -name "*.pdf" | while IFS= read -r line ; do mv $line.converted $line; done
+
+# Add generated files to git
+git add ./content/generated/pdf/
