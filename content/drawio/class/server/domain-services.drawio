@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0" version="28.2.5">
+<mxfile host="drawio-plugin" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" modified="2025-10-04T13:23:59.110Z" version="22.1.22" etag="-15rmTMUTwRtd0ifOzAd" type="embed">
   <diagram name="Seite-1" id="tv3RCUC1lsHie5otSo7a">
-    <mxGraphModel dx="1678" dy="972" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="436" dy="400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -14,7 +14,7 @@
           <mxGeometry y="48" width="480" height="20" as="geometry" />
         </mxCell>
         <mxCell id="or_CeoF1ms0C0JRZWl1a-9" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;AuthenticationService&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="124" y="130" width="580" height="220" as="geometry" />
+          <mxGeometry x="124" y="130" width="580" height="240" as="geometry" />
         </mxCell>
         <mxCell id="or_CeoF1ms0C0JRZWl1a-10" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="or_CeoF1ms0C0JRZWl1a-9" vertex="1">
           <mxGeometry y="40" width="580" height="8" as="geometry" />
@@ -34,17 +34,20 @@
         <mxCell id="or_CeoF1ms0C0JRZWl1a-15" value="createRefreshToken(UUID): UUID throws NotFoundException" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="or_CeoF1ms0C0JRZWl1a-9" vertex="1">
           <mxGeometry y="128" width="580" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="or_CeoF1ms0C0JRZWl1a-16" value="createAccount(String, String, String, int, boolean, boolea, boolean): Account throws NotUniqueException, &lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;OperationDisabledException" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="or_CeoF1ms0C0JRZWl1a-9" vertex="1">
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-16" value="createAccount(String, String, String, int, boolean, boolean, boolean): Account throws NotUniqueException, &lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;OperationDisabledException" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="or_CeoF1ms0C0JRZWl1a-9" vertex="1">
           <mxGeometry y="148" width="580" height="32" as="geometry" />
         </mxCell>
-        <mxCell id="or_CeoF1ms0C0JRZWl1a-17" value="requestEmailVerification(UUID) throws NotFoundException" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="or_CeoF1ms0C0JRZWl1a-9" vertex="1">
+        <mxCell id="2" value="ensureSingletonAdminAccount(String, String): Account" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="or_CeoF1ms0C0JRZWl1a-9">
           <mxGeometry y="180" width="580" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="or_CeoF1ms0C0JRZWl1a-18" value="validateEmail(UUID): Account throws InvalidTokenException" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="or_CeoF1ms0C0JRZWl1a-9" vertex="1">
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-17" value="requestEmailVerification(UUID) throws NotFoundException" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="or_CeoF1ms0C0JRZWl1a-9" vertex="1">
           <mxGeometry y="200" width="580" height="20" as="geometry" />
         </mxCell>
+        <mxCell id="or_CeoF1ms0C0JRZWl1a-18" value="validateEmail(UUID): Account throws InvalidTokenException" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="or_CeoF1ms0C0JRZWl1a-9" vertex="1">
+          <mxGeometry y="220" width="580" height="20" as="geometry" />
+        </mxCell>
         <mxCell id="or_CeoF1ms0C0JRZWl1a-19" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ReplicService&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="143" y="370" width="540" height="160" as="geometry" />
+          <mxGeometry x="143" y="390" width="540" height="160" as="geometry" />
         </mxCell>
         <mxCell id="or_CeoF1ms0C0JRZWl1a-20" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="or_CeoF1ms0C0JRZWl1a-19" vertex="1">
           <mxGeometry y="40" width="540" height="8" as="geometry" />
@@ -65,7 +68,7 @@
           <mxGeometry y="140" width="540" height="20" as="geometry" />
         </mxCell>
         <mxCell id="or_CeoF1ms0C0JRZWl1a-29" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ReportService&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="139.5" y="550" width="547" height="90" as="geometry" />
+          <mxGeometry x="140" y="570" width="547" height="90" as="geometry" />
         </mxCell>
         <mxCell id="or_CeoF1ms0C0JRZWl1a-30" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="or_CeoF1ms0C0JRZWl1a-29" vertex="1">
           <mxGeometry y="40" width="547" height="8" as="geometry" />
@@ -77,7 +80,7 @@
           <mxGeometry y="70" width="547" height="20" as="geometry" />
         </mxCell>
         <mxCell id="or_CeoF1ms0C0JRZWl1a-36" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ServerConfigService&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="316.25" y="660" width="195.5" height="90" as="geometry" />
+          <mxGeometry x="316.25" y="680" width="195.5" height="90" as="geometry" />
         </mxCell>
         <mxCell id="or_CeoF1ms0C0JRZWl1a-37" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="or_CeoF1ms0C0JRZWl1a-36" vertex="1">
           <mxGeometry y="40" width="195.5" height="8" as="geometry" />
