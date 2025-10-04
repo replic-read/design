@@ -164,6 +164,59 @@
         }
       }
     },
+    "/replics/{id}/": {
+      "put": {
+        "tags": [
+          "Replics"
+        ],
+        "summary": "Update the state of a replic",
+        "description": "Updates the state of a replic.<br><br><b>Authorization:</b> Changing the replic's state from/to 'removed' requires admin authorization, changing the state from/to 'inactive' requires owner authorization.",
+        "operationId": "updateState",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the replic.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "description": "The state of the replic.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "active",
+                "inactive",
+                "inactive"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation was successful.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReplicResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The resource does not exists, or the client does not have acces to it."
+          },
+          "401": {
+            "description": "Either no authentication was presented, or the presented authentication was invalid."
+          }
+        }
+      }
+    },
     "/reports/": {
       "get": {
         "tags": [
@@ -1151,48 +1204,6 @@
           }
         }
       },
-      "CreateReportRequest": {
-        "type": "object",
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "The description of the report."
-          }
-        }
-      },
-      "CreateReplicRequest": {
-        "type": "object",
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "The description of the replic."
-          },
-          "originalUrl": {
-            "type": "string",
-            "format": "url",
-            "description": "The URL of the site the replic is replicating."
-          },
-          "password": {
-            "type": "string",
-            "format": "regex: '^[^\\s]{4,}$'",
-            "description": "The unencrypted password of the replic."
-          },
-          "mediaMode": {
-            "type": "string",
-            "description": "The media-mode of the replic.",
-            "enum": [
-              "all",
-              "images",
-              "none"
-            ]
-          },
-          "expiration": {
-            "type": "string",
-            "format": "iso-8601 timestamp",
-            "description": "The expiration timestamp of the replic."
-          }
-        }
-      },
       "ReplicResponse": {
         "type": "object",
         "properties": {
@@ -1240,7 +1251,7 @@
           },
           "replicState": {
             "type": "string",
-            "description": "The current state of the replic.",
+            "description": "The state of the replic.",
             "enum": [
               "active",
               "inactive",
@@ -1254,6 +1265,48 @@
           "hasPassword": {
             "type": "boolean",
             "description": "Whether the replic is secured via a password."
+          }
+        }
+      },
+      "CreateReportRequest": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "The description of the report."
+          }
+        }
+      },
+      "CreateReplicRequest": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "The description of the replic."
+          },
+          "originalUrl": {
+            "type": "string",
+            "format": "url",
+            "description": "The URL of the site the replic is replicating."
+          },
+          "password": {
+            "type": "string",
+            "format": "regex: '^[^\\s]{4,}$'",
+            "description": "The unencrypted password of the replic."
+          },
+          "mediaMode": {
+            "type": "string",
+            "description": "The media-mode of the replic.",
+            "enum": [
+              "all",
+              "images",
+              "none"
+            ]
+          },
+          "expiration": {
+            "type": "string",
+            "format": "iso-8601 timestamp",
+            "description": "The expiration timestamp of the replic."
           }
         }
       },
