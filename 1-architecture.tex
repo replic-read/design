@@ -377,6 +377,8 @@ This is the default \("\)login\("\) clients will use to authenticate in the back
 \subparagraph{/accounts/} This endpoint is used to get all accounts on the server.
 It is also used to create a new account.
 
+\subparagraph{/replics/\{id\}/} This endpoint is used to update the status of a replic.
+Depending on the passed and current state, the client needs to be an admin or the owner of the replic.
 \subparagraph{/replics/\{id\}/content/} This endpoint is used to retrieve the replicated HTML-content of the replic with it \texttt{id}.
 
 \subparagraph{/auth/request-email-verification/} This endpoint is used to request an email-verification-token to be sent to the email of the account.

@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0" version="28.2.5">
+<mxfile host="drawio-plugin" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" modified="2025-10-04T18:42:21.155Z" version="22.1.22" etag="xF_JnXfXcy4lRTQAi2u4" type="embed">
   <diagram name="Seite-1" id="tv3RCUC1lsHie5otSo7a">
-    <mxGraphModel dx="2852" dy="1652" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="872" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -53,7 +53,7 @@
           <mxGeometry y="128" width="410" height="20" as="geometry" />
         </mxCell>
         <mxCell id="zjGeTOThquZhaolVEsW3-205" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ReplicExecutor&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="411" y="600" width="381" height="120" as="geometry" />
+          <mxGeometry x="411" y="600" width="381" height="140" as="geometry" />
         </mxCell>
         <mxCell id="zjGeTOThquZhaolVEsW3-206" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="zjGeTOThquZhaolVEsW3-205" vertex="1">
           <mxGeometry y="40" width="381" height="8" as="geometry" />
@@ -67,8 +67,11 @@
         <mxCell id="zjGeTOThquZhaolVEsW3-209" value="getReplicContent(UUID, String): String" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="zjGeTOThquZhaolVEsW3-205" vertex="1">
           <mxGeometry y="100" width="381" height="20" as="geometry" />
         </mxCell>
+        <mxCell id="2" value="updateReplicState(Replic, ReplicState)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="zjGeTOThquZhaolVEsW3-205">
+          <mxGeometry y="120" width="381" height="20" as="geometry" />
+        </mxCell>
         <mxCell id="zjGeTOThquZhaolVEsW3-210" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ReportExecutor&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="411" y="740" width="351" height="120" as="geometry" />
+          <mxGeometry x="411" y="770" width="351" height="120" as="geometry" />
         </mxCell>
         <mxCell id="zjGeTOThquZhaolVEsW3-211" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="zjGeTOThquZhaolVEsW3-210" vertex="1">
           <mxGeometry y="40" width="351" height="8" as="geometry" />
@@ -128,7 +131,7 @@
         <mxCell id="zjGeTOThquZhaolVEsW3-249" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" parent="1" source="zjGeTOThquZhaolVEsW3-228" target="zjGeTOThquZhaolVEsW3-240" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="92" y="195" />
+              <mxPoint x="90" y="195" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -144,7 +147,7 @@
         <mxCell id="zjGeTOThquZhaolVEsW3-248" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" parent="1" source="zjGeTOThquZhaolVEsW3-230" target="zjGeTOThquZhaolVEsW3-240" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="92" y="374" />
+              <mxPoint x="90" y="374" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -160,7 +163,7 @@
         <mxCell id="zjGeTOThquZhaolVEsW3-246" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" parent="1" source="zjGeTOThquZhaolVEsW3-232" target="zjGeTOThquZhaolVEsW3-240" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="92" y="524" />
+              <mxPoint x="90" y="524" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -176,7 +179,7 @@
         <mxCell id="zjGeTOThquZhaolVEsW3-245" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" parent="1" source="zjGeTOThquZhaolVEsW3-234" target="zjGeTOThquZhaolVEsW3-240" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="92" y="660" />
+              <mxPoint x="90" y="670" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -184,7 +187,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="zjGeTOThquZhaolVEsW3-234" value="&lt;b&gt;ReplicExecutorImpl&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="157" y="641" width="170" height="38" as="geometry" />
+          <mxGeometry x="157" y="651" width="170" height="38" as="geometry" />
         </mxCell>
         <mxCell id="zjGeTOThquZhaolVEsW3-235" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="zjGeTOThquZhaolVEsW3-234" vertex="1">
           <mxGeometry y="30" width="170" height="8" as="geometry" />
@@ -192,7 +195,7 @@
         <mxCell id="zjGeTOThquZhaolVEsW3-244" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" parent="1" source="zjGeTOThquZhaolVEsW3-236" target="zjGeTOThquZhaolVEsW3-240" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="92" y="800" />
+              <mxPoint x="90" y="830" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -200,7 +203,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="zjGeTOThquZhaolVEsW3-236" value="&lt;b&gt;ReportExecutorImpl&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="157" y="781" width="170" height="38" as="geometry" />
+          <mxGeometry x="157" y="811" width="170" height="38" as="geometry" />
         </mxCell>
         <mxCell id="zjGeTOThquZhaolVEsW3-237" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="zjGeTOThquZhaolVEsW3-236" vertex="1">
           <mxGeometry y="30" width="170" height="8" as="geometry" />
@@ -208,7 +211,7 @@
         <mxCell id="zjGeTOThquZhaolVEsW3-243" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;" parent="1" source="zjGeTOThquZhaolVEsW3-238" target="zjGeTOThquZhaolVEsW3-240" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="92" y="924" />
+              <mxPoint x="90" y="924" />
             </Array>
           </mxGeometry>
         </mxCell>

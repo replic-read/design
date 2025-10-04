@@ -1,11 +1,11 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0" version="28.2.5">
+<mxfile host="drawio-plugin" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" modified="2025-10-04T18:50:06.471Z" version="22.1.22" etag="IQI26V38dytPOJW9GVAY" type="embed">
   <diagram name="Seite-1" id="tv3RCUC1lsHie5otSo7a">
-    <mxGraphModel dx="1426" dy="826" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1352" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="YMPAv5R0shXRWI4nXXSt-44" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;NetworkInterface&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="20" y="190" width="800" height="488" as="geometry" />
+          <mxGeometry x="20" y="190" width="800" height="508" as="geometry" />
         </mxCell>
         <mxCell id="YMPAv5R0shXRWI4nXXSt-45" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="YMPAv5R0shXRWI4nXXSt-44" vertex="1">
           <mxGeometry y="40" width="800" height="8" as="geometry" />
@@ -43,38 +43,41 @@
         <mxCell id="YMPAv5R0shXRWI4nXXSt-95" value="createReplic(CreateReplicRequest): Observable&amp;lt;ReplicResponse&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="YMPAv5R0shXRWI4nXXSt-44" vertex="1">
           <mxGeometry y="248" width="800" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="YMPAv5R0shXRWI4nXXSt-94" value="getReplics(ReplicSortParameter, SortDirectionParameter, string, string, Set&amp;lt;ReplicState&amp;gt;, string): Observable&amp;lt;Array&amp;lt;ReplicResponse&amp;gt;&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="YMPAv5R0shXRWI4nXXSt-44" vertex="1">
+        <mxCell id="2" value="updateReplicState(string, ReplicState): Observable&amp;lt;Replic&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="YMPAv5R0shXRWI4nXXSt-44">
           <mxGeometry y="268" width="800" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="hewvA5DubjTdve_OU9Q2-1" value="getReplicContent(string, string): Observable&amp;lt;string&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="YMPAv5R0shXRWI4nXXSt-44">
+        <mxCell id="YMPAv5R0shXRWI4nXXSt-94" value="getReplics(ReplicSortParameter, SortDirectionParameter, string, string, Set&amp;lt;ReplicState&amp;gt;, string): Observable&amp;lt;Array&amp;lt;ReplicResponse&amp;gt;&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="YMPAv5R0shXRWI4nXXSt-44" vertex="1">
           <mxGeometry y="288" width="800" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="YMPAv5R0shXRWI4nXXSt-93" value="requestEmailVerification(boolean): Observable&amp;lt;void&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="YMPAv5R0shXRWI4nXXSt-44" vertex="1">
+        <mxCell id="hewvA5DubjTdve_OU9Q2-1" value="getReplicContent(string, string): Observable&amp;lt;string&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="YMPAv5R0shXRWI4nXXSt-44" vertex="1">
           <mxGeometry y="308" width="800" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="YMPAv5R0shXRWI4nXXSt-92" value="login(CredentialsReuqest): Observable&amp;lt;AccountWithTokensResponse&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="YMPAv5R0shXRWI4nXXSt-44" vertex="1">
+        <mxCell id="YMPAv5R0shXRWI4nXXSt-93" value="requestEmailVerification(boolean): Observable&amp;lt;void&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="YMPAv5R0shXRWI4nXXSt-44" vertex="1">
           <mxGeometry y="328" width="800" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="YMPAv5R0shXRWI4nXXSt-91" value="refresh(RefreshRequest): Observable&amp;lt;AccountWithTokensResponse&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="YMPAv5R0shXRWI4nXXSt-44" vertex="1">
+        <mxCell id="YMPAv5R0shXRWI4nXXSt-92" value="login(CredentialsReuqest): Observable&amp;lt;AccountWithTokensResponse&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="YMPAv5R0shXRWI4nXXSt-44" vertex="1">
           <mxGeometry y="348" width="800" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="YMPAv5R0shXRWI4nXXSt-90" value="signup(CreateAccountRequest, boolean): Observable&amp;lt;AccountWithTokensResponse&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="YMPAv5R0shXRWI4nXXSt-44" vertex="1">
+        <mxCell id="YMPAv5R0shXRWI4nXXSt-91" value="refresh(RefreshRequest): Observable&amp;lt;AccountWithTokensResponse&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="YMPAv5R0shXRWI4nXXSt-44" vertex="1">
           <mxGeometry y="368" width="800" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="YMPAv5R0shXRWI4nXXSt-89" value="submitEmailVerification(SubmitEmailVerificationRequest): Observable&amp;lt;void&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="YMPAv5R0shXRWI4nXXSt-44" vertex="1">
+        <mxCell id="YMPAv5R0shXRWI4nXXSt-90" value="signup(CreateAccountRequest, boolean): Observable&amp;lt;AccountWithTokensResponse&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="YMPAv5R0shXRWI4nXXSt-44" vertex="1">
           <mxGeometry y="388" width="800" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="YMPAv5R0shXRWI4nXXSt-88" value="restart(): Observable&amp;lt;void&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="YMPAv5R0shXRWI4nXXSt-44" vertex="1">
+        <mxCell id="YMPAv5R0shXRWI4nXXSt-89" value="submitEmailVerification(SubmitEmailVerificationRequest): Observable&amp;lt;void&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="YMPAv5R0shXRWI4nXXSt-44" vertex="1">
           <mxGeometry y="408" width="800" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="YMPAv5R0shXRWI4nXXSt-86" value="getAccountsFull(AccountSortParameter, SortDirectionParameter, string, Set&amp;lt;AccountState&amp;gt;, string): Observable&amp;lt;Array&amp;lt;PartialAccountResponse&amp;gt;&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="YMPAv5R0shXRWI4nXXSt-44" vertex="1">
+        <mxCell id="YMPAv5R0shXRWI4nXXSt-88" value="restart(): Observable&amp;lt;void&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="YMPAv5R0shXRWI4nXXSt-44" vertex="1">
           <mxGeometry y="428" width="800" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="YMPAv5R0shXRWI4nXXSt-85" value="getAccountsPartial(AccountSortParameter, SortDirectionParameter, string, string): Observable&amp;lt;Array&amp;lt;PartialAccountResponse&amp;gt;&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="YMPAv5R0shXRWI4nXXSt-44" vertex="1">
+        <mxCell id="YMPAv5R0shXRWI4nXXSt-86" value="getAccountsFull(AccountSortParameter, SortDirectionParameter, string, Set&amp;lt;AccountState&amp;gt;, string): Observable&amp;lt;Array&amp;lt;PartialAccountResponse&amp;gt;&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="YMPAv5R0shXRWI4nXXSt-44" vertex="1">
           <mxGeometry y="448" width="800" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="YMPAv5R0shXRWI4nXXSt-84" value="createAccount(CreateAccountRequest), boolean, boolean): Observable&amp;lt;AccountResponse&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="YMPAv5R0shXRWI4nXXSt-44" vertex="1">
+        <mxCell id="YMPAv5R0shXRWI4nXXSt-85" value="getAccountsPartial(AccountSortParameter, SortDirectionParameter, string, string): Observable&amp;lt;Array&amp;lt;PartialAccountResponse&amp;gt;&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="YMPAv5R0shXRWI4nXXSt-44" vertex="1">
           <mxGeometry y="468" width="800" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="YMPAv5R0shXRWI4nXXSt-84" value="createAccount(CreateAccountRequest), boolean, boolean): Observable&amp;lt;AccountResponse&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="YMPAv5R0shXRWI4nXXSt-44" vertex="1">
+          <mxGeometry y="488" width="800" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
