@@ -395,7 +395,26 @@ Figure~\ref{fig:active-scrape-service} shows the slim interface, where the only 
     \label{fig:active-scrape-service}
 \end{figure}
 
-\paragraph{ViewModel (Active client)}
+\paragraph{ViewModel}
+The \textit{ViewModel} interface of both the active and passive client expose \texttt{Signal}s, \texttt{FormControl}s and methods, i.e.\ event-handlers, as shown in Figure~\ref{fig:passive-viewmodel} and Figure~\ref{fig:active-viewmodel}.
+These are comsumed by the \textit{AngularJS} templates.
+For this reason, despite being displayed in a class-diagram and being marked with \«interface\», they should be seen as a loose collection of fields and methods available to a specific angular-template.
+
+\begin{figure}
+    \centering
+    \fbox{\includegraphics[width=\linewidth]{active-viewmodel}}
+
+    \caption{Interface of \textit{ViewModel} (Active Client)}
+    \label{fig:active-viewmodel}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \fbox{\includegraphics[width=\linewidth]{passive-viewmodel}}
+
+    \caption{Interface of \textit{ViewModel} (Passive Client)}
+    \label{fig:passive-viewmodel}
+\end{figure}
 
 
 % \subsubsection{Network-Interface}
