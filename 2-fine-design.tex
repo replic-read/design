@@ -315,7 +315,7 @@ Additionally, it is provided the configuration values \texttt{accessTokenExpirat
 \subsubsection{Client internal interfaces}
 In the following, we will present the fine design of the internal server interfaces, as described in~\ref{subsec:internal-client-interfaces}.
 
-\paragraph{Network-Interface}
+\paragraph{Network-Interface}\label{par:common-networkinterface}
 The \textit{Network-Interface} provides streamlined access to all relevant endpoints and http-methods on the \textit{REST-API}, as shown in Figure~\ref{fig:common-networkinterface}.
 Per endpoint and http-method, there is one method whose parameters are the request body, path variables or query paremetr.
 The return type of the methods are \texttt{Observable<T>}s from \textit{RxJs} \footnote{https://rxjs.dev/guide/observable} that contain the response body of the request.
@@ -371,33 +371,34 @@ The interface also provides some specialized error types that make the error-han
 \paragraph{Common-Facade}
 The \textit{Common-Facade} interface bundles the already introduced interfaces \textit{Data-Services} (\ref{par:common-data-services}), \textit{Authentication-Service} (\ref{par:common-authentication-service}) and \textit{Domain-Models} (\ref{par:common-domain-models}).
 
-\paragraph{Config-Service}
+\paragraph{Config-Service}\label{par:active-config-service}
 The \textit{Config-Service} exposes functionality to locally save the settings of the active client.
 As shown in Figure~\ref{fig:active-config-service}, the only configuration is the URL of the backend server.
 
 \begin{figure}
     \centering
-    \fbox{\includegraphics[width=\linewidth]{active-config-service}}
+    \fbox{\includegraphics{active-config-service}}
 
     \caption{Interface of \textit{Config-Service} (Active Client)}
     \label{fig:active-config-service}
 \end{figure}
 
-\paragraph{Scrape-Service}
+\paragraph{Scrape-Service}\label{par:active-scrape-service}
 The \textit{Scrape-Service} handles creating the singular HTML-file that is sent to the server when creating a replic.
 Figure~\ref{fig:active-scrape-service} shows the slim interface, where the only method \texttt{createForCurrentTab} creates this HTML-file.
 
 \begin{figure}
     \centering
-    \fbox{\includegraphics[width=\linewidth]{active-scrape-service}}
+    \fbox{\includegraphics{active-scrape-service}}
 
     \caption{Interface of \textit{Scrape-Service} (Active Client)}
     \label{fig:active-scrape-service}
 \end{figure}
 
-\paragraph{ViewModel}
+\paragraph{ViewModel}\label{par:viewmodel}
 The \textit{ViewModel} interface of both the active and passive client expose \texttt{Signal}s, \texttt{FormControl}s and methods, i.e.\ event-handlers, as shown in Figure~\ref{fig:passive-viewmodel} and Figure~\ref{fig:active-viewmodel}.
-These are comsumed by the \textit{AngularJS} templates.
+These are consumed by the \textit{AngularJS} templates.
+For both clients, the \texttt{MainLayoutViewModel} is the \textit{ViewModel} for the layout containing nav-bar and footer, ich which the other views are embedded.
 For this reason, despite being displayed in a class-diagram and being marked with \«interface\», they should be seen as a loose collection of fields and methods available to a specific angular-template.
 
 \begin{figure}
@@ -416,17 +417,64 @@ For this reason, despite being displayed in a class-diagram and being marked wit
     \label{fig:passive-viewmodel}
 \end{figure}
 
+\subsubsection{Network-Interface}
+The \textit{Network-Interface} is provided by the \texttt{AngularHttpNetworkInterface} class, as shown in Figure~\ref{fig:common-networkinterface-p}.
+It is backed by an \texttt{HttpClient} \footnote{https://angular.dev/guide/http} from \textit{AngularJs} that is used to perform the http-requests.
+The methods delegate calls to the respective endpoint and add necessary headers.
 
-% \subsubsection{Network-Interface}
-% The \textit{Network-Interface} is provided by the \texttt{AngularHttpNetworkInterface} class, as shown in Figure~\ref{fig:common-networkinterface-p}.
-% It is backed by a \texttt{HttpClient} \footnote{https://angular.dev/guide/http} from \textit{AngularJs}.that is used to perform the http-requests.
-% The methods delegate calls to the respective endpoint and add necessary headers.
-%
-% \begin{figure}
-%     \centering
-%     \fbox{\includegraphics[width=\linewidth]{common-networkinterface-p}}
-%
-%     \caption{Provision of \textit{Network-Interface} (Client)}
-%     \label{fig:common-networkinterface-p}
-% \end{figure}
+\begin{figure}
+    \centering
+    \fbox{\includegraphics[width=\linewidth]{common-networkinterface-p}}
+    \caption{Provision of \textit{Network-Interface} (Client)}
+    \label{fig:common-networkinterface-p}
+\end{figure}
 
+\subsubsection{Authentication-Service}
+The \textit{Authentication-Service} interface is provided by the \texttt{NetworkAuthenticationService}, which is backed by the network-interface as shown in Figure~\ref{fig:common-authentication-service-p}.
+The class delegates calls to the network-interface and maps the \textit{HttpErrorResponse}s to \textit{Error}s.
+
+\begin{figure}
+    \centering
+    \fbox{\includegraphics{common-authentication-service-p}}
+    \caption{Provision of \textit{Authentication-Service} (Client)}
+    \label{fig:common-authentication-service-p}
+\end{figure}
+
+\subsubsection{Data-Services}
+The \textit{Data-Services} interface is provided by multiple classes as shown in Figure~\ref{fig:common-data-services-p} that implement the interfaces as presented in~\ref{fig:common-data-services}. \newline
+The \texttt{BaseDataService} acts as a base that ensures every service has access to the authentication service and network interface, by which the implementations are backed.
+The implementations will call the required endpoints and use the \texttt{save} method of the authentication service to ensure proper authentication.
+Errors and response bodies will be mapped to the domain-models.
+
+\begin{figure}
+    \centering
+    \fbox{\includegraphics[width=\linewidth]{common-data-services-p}}
+    \caption{Provision of \textit{Data-Service} (Client)}
+    \label{fig:common-data-services-p}
+\end{figure}
+
+\subsubsection{Config-Service}
+How the \textit{Config-Service} is provided depends on the current browser the extension is running in.
+For chrome, the interface is provided by the \texttt{ChromeStorageConfigService} that is backed by the \texttt{chrome.storage} api \footnote{https://developer.chrome.com/docs/extensions/reference/api/storage}.
+For firefox, the interface is provided by the \texttt{FirefoxStorageConfigService} that is backed by the \texttt{storage} api \footnote{https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/storage}. \newline
+Both implementations use the browser-specific storage api to save key-value pairs.
+The structure is shown in Figure~\ref{fig:active-config-service-p}.
+
+\begin{figure}
+    \centering
+    \fbox{\includegraphics{active-config-service-p}}
+    \caption{Provision of \textit{Config-Service} (Client)}
+    \label{fig:active-config-service-p}
+\end{figure}
+
+\subsubsection{Scrape-Service}
+The \textit{Scrape-Service} is provided by the \texttt{TabsScrapeService} whose implementation is backed by the \textit{tabs} api \footnote{https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/tabs}.
+The service pulls the html-content of the current tab and performs some pre-processing, like embedding the referenced scripts and stylesheets.
+Figure~\ref{fig:active-scrape-service-p} shows the structure.
+
+\begin{figure}
+    \centering
+    \fbox{\includegraphics{active-scrape-service-p}}
+    \caption{Provision of \textit{Scrape-Service} (Client)}
+    \label{fig:active-scrape-service-p}
+\end{figure}
