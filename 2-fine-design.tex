@@ -312,6 +312,42 @@ Additionally, it is provided the configuration values \texttt{accessTokenExpirat
 
 \subsection{Client fine design}\label{subsec:client-fine-design-common}
 
+\subsubsection{Client navigation}
+
+\paragraph{Active client}
+The navigation in the active client is based around the \textit{Create Replic} view.
+It is the initial screen if all requirements are met, and once inside, the user will always cycle back to it. \newline
+Before being able to reach all other vies, the user must set an endpoint in the \textit{Set Endpoint} view.
+After that, the user is being guided toward the replic views, i.e.\ the flow for creating replics.
+The path depends on the requirements for being able to create a replic, namely being authenticated or being verified.
+The \textit{Authentication} flow is composed of the \textit{Login} and \textit{Signup} views.
+If the user has to be verified, they are directed to the \textit{Email-not-verified} view until the email is verified.
+The whole navigation graph is visualized in Figure~\ref{fig:active-navigation}
+
+\begin{figure}
+    \centering
+    \fbox{\includegraphics[width=\linewidth]{active-navigation}}
+
+    \caption{Navigation graph of the active client}
+    \label{fig:active-navigation}
+\end{figure}
+
+\paragraph{Passive client}
+The navigation in the passive client is decentralized and centered around the top-level views: \textit{All Replics}, \textit{All Reports}, \textit{All Users} and \textit{Account}, which are all accessible via the global navigation-bar.
+Default entrypoint is the \textit{All Replics} view.
+Additionally, the user can enter the app either by following the link to a replic or by using an email-verification-link, which will take them to the \textit{Replic Info} or \textit{Email Verification} view, respectively.
+Former can also be reached via the \textit{All Replics} or \textit{All Reports} view.
+To signify that an action requires the user to be verified, a designated \textit{Email not verified} view exists.
+The whole navigation graph is visualized in Figure~\ref{fig:passive-navigation}
+
+\begin{figure}
+    \centering
+    \fbox{\includegraphics[width=\linewidth]{passive-navigation}}
+
+    \caption{Navigation graph of the passive client}
+    \label{fig:passive-navigation}
+\end{figure}
+
 \subsubsection{Client internal interfaces}
 In the following, we will present the fine design of the internal server interfaces, as described in~\ref{subsec:internal-client-interfaces}.
 
