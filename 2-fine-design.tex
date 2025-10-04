@@ -104,7 +104,6 @@ Figure~\ref{fig:using-refresh-token} visualizes this flow.
 \end{figure}
 
 \subsection{Server fine design}\label{subsec:server-fine-design}
-
 \subsubsection{Configuration}
 Aside from the server-config that can be set up inside the admin-panel in the web-client, there are configurations that are not domain-related and will not be available on that panel.
 The following options can be configured:
@@ -124,8 +123,15 @@ The following options can be configured:
     \item \textit{Mail smtp host:} The smtp host for email authentication.
     \item \textit{Mail smtp port:} The smtp port for email authentication.
     \item \textit{Mail SSL:} Whether to use SSL for email authentication.
+    \item \textit{Admin email} The email of the admin account.
+    \item \textit{Admin password} The password of the admin account.
 \end{itemize}
 These parameters are provided to the server program externally.
+
+\subsubsection{Admin accounts}
+There exists exactly one admin account.
+When the server application starts, it is ensured that the only account that is an admin is the one referenced in the configuration.
+The admin accounts email and password are specified in the configuration, while the username is always \("\)admin\("\).
 
 \subsubsection{Internal server interfaces}
 In the following, we will present the fine design of the internal server interfaces, as described in~\ref{subsec:internal-server-interfaces}.
