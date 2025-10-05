@@ -65,6 +65,7 @@ CREATE TABLE server_config
 
     limit_period           TEXT,
     limit_count            integer,
+    limit_period_start TIMESTAMP,
     min_exp_period         TEXT
 );
 

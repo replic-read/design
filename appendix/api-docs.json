@@ -70,7 +70,7 @@
             "content": {
               "*/*": {
                 "schema": {
-                  "$ref": "#/components/schemas/ServerConfigDto"
+                  "$ref": "#/components/schemas/ServerConfigRequest"
                 }
               }
             }
@@ -88,7 +88,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ServerConfigDto"
+                "$ref": "#/components/schemas/ServerConfigRequest"
               }
             }
           },
@@ -100,7 +100,7 @@
             "content": {
               "*/*": {
                 "schema": {
-                  "$ref": "#/components/schemas/ServerConfigDto"
+                  "$ref": "#/components/schemas/ServerConfigRequest"
                 }
               }
             }
@@ -1126,7 +1126,7 @@
   },
   "components": {
     "schemas": {
-      "ServerConfigDto": {
+      "ServerConfigRequest": {
         "type": "object",
         "properties": {
           "createReplicGroup": {
